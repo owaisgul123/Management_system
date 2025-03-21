@@ -1,0 +1,460 @@
+<%- contentFor('HeaderCss') %>
+  <!-- Datatables css -->
+  <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" />
+
+  <%- contentFor('body') %>
+    <div id="preloader">
+      <div id="status">
+        <div class="bouncing-loader">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+          <h4 class="page-title">Users</h4>
+          <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item">
+              <a href="javascript: void(0);">Jidox</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="javascript: void(0);">Tables</a>
+            </li>
+            <li class="breadcrumb-item active">User</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div style="display: flex; gap: 10px; margin-bottom: 15px">
+              <button class="btn btn-soft-success" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <i class="fas fa-plus"></i> Create User
+              </button>
+            </div>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+              aria-labelledby="offcanvasRightLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body" id="editUserForm">
+                <hr />
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="username" class="form-control" id="username" placeholder="Enter username" />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="mb-3 col-sm-3 col-lg-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                  </div>
+                  <div class="mb-3 col-sm-3 col-lg-6">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group input-group-merge">
+                      <input type="password" id="password" class="form-control" placeholder="Enter your password" />
+                      <div class="input-group-text" data-password="false">
+                        <span class="password-eye"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button class="btn rounded-pill btn-primary" type="submit" onclick="createUser()">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+            <table id="users_table" class="table table-striped dt-responsive nowrap w-100">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Passward</th>
+                  <th>Delete</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <!-- end card body-->
+        </div>
+        <!-- end card -->
+      </div>
+      <!-- end col-->
+    </div>
+    <!-- end row-->
+
+    <!-- Edit User Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="editUserOffcanvas" aria-labelledby="editUserOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="editUserOffcanvasLabel">Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" id="editUserForm">
+        <hr />
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="editName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="editName" placeholder="Enter name" />
+          </div>
+          <div class="col-md-6">
+            <label for="editUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="editUsername" placeholder="Enter username" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="mb-3 col-sm-3 col-lg-6">
+            <label for="editEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="editEmail" placeholder="Enter email" />
+          </div>
+          <div class="mb-3 col-sm-3 col-lg-6">
+            <label for="editPassword" class="form-label">Password</label>
+            <div class="input-group input-group-merge">
+              <input type="password" id="editPassword" class="form-control" placeholder="Enter new password" />
+              <div class="input-group-text" data-password="false">
+                <span class="password-eye"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button class="btn rounded-pill btn-primary" type="submit" onclick="updateUser()">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <%- contentFor('FooterJs') %>
+      <!-- Datatables js -->
+      <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+      <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+      <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+      <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+      <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+      <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+      <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+      <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+      <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+      <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+      <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+      <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+      <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+      <script src="assets/vendor/select2/js/select2.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <!-- Datatable Demo Aapp js -->
+      <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+
+      <script>
+        $(document).ready(() => {
+          // Initialize select2 for dropdown
+          $(".select3").select2({
+            width: "100%",
+            dropdownParent: $("#offcanvasRight"),
+          });
+
+          // Initialize DataTable
+          table = $("#users_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "print", "excel", "csv", "pdf"],
+            language: {
+              paginate: {
+                previous: "<i class='ri-arrow-left-s-line'>",
+                next: "<i class='ri-arrow-right-s-line'>",
+              },
+            },
+            drawCallback: function () {
+              $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+            },
+          });
+
+          table
+            .buttons()
+            .container()
+            .appendTo("#users_table_wrapper .col-md-6:eq(0)");
+
+          // Fetch users on page load
+          fetchtable();
+        });
+
+        function fetchtable() {
+          var settings = {
+            url: "https://hungry-chaum.92-205-119-218.plesk.page/user_details/all_users.php",
+            method: "GET",
+          };
+          $.ajax(settings)
+            .done(function (response) {
+              console.log(response); // Log the response to check the structure
+
+              // Extract the 'users' array from the response
+              var users = Array.isArray(response.users) ? response.users : [];
+
+              if (users.length === 0) {
+                console.error("No users found!");
+                return;
+              }
+
+              table.clear().draw(); // Clear any existing rows
+
+              // Loop through the users data and populate the table
+              users.forEach((data, index) => {
+                var names = data.name || "N/A";
+                var username = data.username || "N/A";
+                var email = data.email || "N/A";
+                var password = "****"; // Hide password for security
+
+                table.row
+                  .add([
+                    data.id,
+                    names,
+                    username,
+                    email,
+                    password,
+
+                    `<button type="button" id="delete" name="delete" onclick="deleteData(${data.id})" class="btn btn-soft-danger"><i class="bx bx-trash-alt font-size-16 align-middle"></i></button>`,
+                    `<button type="button" id="edit" name="edit" onclick="editData( ${data.id})" class="btn btn-soft-warning"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>`,
+                  ])
+                  .draw(false); // Add the row to the table
+              });
+
+              // console.log("Data fetched and table updated!");
+            })
+            .fail(function (error) {
+              console.error("Error fetching data: ", error);
+            });
+        }
+
+        function createUser() {
+          var form = new FormData();
+          form.append("name", document.getElementById("name").value);
+          form.append("username", document.getElementById("username").value);
+          form.append("email", document.getElementById("email").value);
+          form.append("password", document.getElementById("password").value);
+
+          var settings = {
+            url: `https://hungry-chaum.92-205-119-218.plesk.page/user_details/post_user.php`,
+            method: "POST",
+            timeout: 0,
+            processData: false,
+            "Access-Control-Allow-Headers": "*",
+            mimeType: "multipart/form-data",
+            contentType: false,
+            data: form,
+          };
+
+          $.ajax(settings)
+            .done(function (response, textStatus, xhr) {
+              let statusCode = xhr.status; // Response status code
+
+              if (statusCode === 201) {
+                showPopup("Success!", "User created successfully.", "success");
+
+                // After successful creation, add the user to the DataTable
+                fetchtable();
+
+                // Reset the form inputs after saving
+                document.getElementById("name").value = "";
+                document.getElementById("username").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("password").value = "";
+
+                // Close the offcanvas after saving
+                var offcanvas = new bootstrap.Offcanvas(
+                  document.getElementById("offcanvasRight")
+                );
+                offcanvas.hide();
+              } else {
+                showPopup("Error!", "There was an error creating the user.", "error");
+              }
+            })
+            .fail(function (xhr) {
+              let statusCode = xhr.status;
+              let message = "An Error Occurred, please try again!";
+              let icon = "error";
+
+              if (statusCode === 409) {
+                message = "Error: Conflict detected!";
+                icon = "warning";
+              } else if (statusCode === 404) {
+                message = "Error: Resource not found!";
+                icon = "error";
+              }
+              showPopup("Error!", message, icon);
+            });
+        }
+
+        function showPopup(title, message, icon) {
+          Swal.fire({
+            title: title,
+            text: message,
+            icon: icon,
+            confirmButtonText: "OK",
+          });
+        }
+
+        // Function to delete user
+        function deleteData(userId) {
+          var settings = {
+            url: `https://hungry-chaum.92-205-119-218.plesk.page/user_details/delete_user.php`,
+            method: "POST",
+            timeout: 0,
+            data: { id: userId },
+          };
+
+          $.ajax(settings)
+            .done(function (response) {
+              if (response.status === "success") {
+                showPopup("Success!", "User deleted successfully.", "success");
+                fetchtable();
+                // table.row(`#${userId}`).remove().draw(false);  // Remove the deleted row from DataTable
+              } else {
+                showPopup("Error!", "There was an error deleting the user.", "error");
+              }
+            })
+            .fail(function (xhr) {
+              showPopup("Error!", "An error occurred. Please try again.", "error");
+            });
+        }
+
+        // Function to edit user
+        function editData(userId) {
+          var settings = {
+            url: `https://hungry-chaum.92-205-119-218.plesk.page/user_details/get_user.php`,
+            method: "GET",
+            data: { id: userId },
+            success: function (response) {
+              console.log("Response Data: ", response);
+
+              if (response && response.data) {
+                var user = response.data; // Accessing 'data' from response
+
+                // Populate the modal form with the fetched data
+                document.getElementById("editName").value = user.name || "";
+                document.getElementById("editUsername").value = user.username || "";
+                document.getElementById("editEmail").value = user.email || "";
+                document.getElementById("editPassword").value = user.password || "";
+
+                // Set a custom attribute to remember the userId
+                document
+                  .getElementById("editUserForm")
+                  .setAttribute("data-user-id", userId);
+
+                // Show the offcanvas form
+                var offcanvasElement = document.getElementById("editUserOffcanvas");
+                var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                offcanvas.show();
+              } else {
+                console.log("User not found or response format is incorrect.");
+                alert("Error: User not found or response format is incorrect.");
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error("Error fetching user details: ", error);
+              alert("There was an error fetching user details.");
+            },
+          };
+
+          $.ajax(settings);
+        }
+
+        // Function to update user data
+        function updateUser() {
+          var name = document.getElementById("editName").value;
+          var username = document.getElementById("editUsername").value;
+          var email = document.getElementById("editEmail").value;
+          var password = document.getElementById("editPassword").value;
+
+          // Get the user ID from the form's custom attribute
+          var userId = document
+            .getElementById("editUserForm")
+            .getAttribute("data-user-id");
+
+          // Prepare data to send in the request
+          var formData = {
+            id: userId,
+            name: name,
+            username: username,
+            email: email,
+            password: password,
+          };
+
+          // AJAX Request to update the user data
+          $.ajax({
+            url: "https://hungry-chaum.92-205-119-218.plesk.page/user_details/update_user.php",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+              console.log("User data updated successfully", response);
+
+              // SweetAlert for success
+              Swal.fire({
+                title: "Success!",
+                text: "User updated successfully!",
+                icon: "success",
+                confirmButtonText: "OK",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  updateUserTable(userId, name, username, email);
+                  var offcanvasElement = document.getElementById("editUserOffcanvas");
+                  var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                  offcanvas.hide();
+                }
+              });
+            },
+            error: function (xhr, status, error) {
+              console.error("Error updating user data: ", error);
+              alert("There was an error updating the user.");
+            },
+          });
+        }
+
+        // Function to update the user data in the table
+
+        // Example: Call this function when you want to open the edit modal for a user
+        // document.querySelector('.edit-btn').addEventListener('click', function () {
+        //     var userId = this.getAttribute('data-user-id');
+        //     editData(userId);  // Fetch the user data and populate the form
+        // });
+      </script>
+      <!-- <script src="config.js"></script>
+            <script src="your-script.js"></script> -->

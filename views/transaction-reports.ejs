@@ -1,0 +1,192 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+
+    <%- contentFor('body') %>
+
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Reports</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                            </div>
+                        </div>
+
+                        <div class="container mt-4">
+                            <h4 class="text-center mb-4">Transaction-Report</h4>
+                            <hr class="border-3 border-dark" style="width: 90%; margin: 0 auto;">
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <form id="transactionForm" class="bg-light bg-opacity-10 p-4 rounded">
+                                        <div class="mb-3">
+                                            <label for="account" class="form-label">Account #</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select Account</option>
+                                                <option value="1">Account 1</option>
+                                                <option value="2">Account 2</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="card" class="form-label">Card</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select Card</option>
+                                                <option value="1">Card 1</option>
+                                                <option value="2">Card 2</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="dealer" class="form-label">Dealer</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select Dealer</option>
+                                                <option value="1">Dealer 1</option>
+                                                <option value="2">Dealer 2</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Date From</label>
+                                            <input type="text" id="basic-datepicker2" class="form-control" placeholder="2025-02-01">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Date To</label>
+                                            <input type="text" id="basic-datepicker2" class="form-control" placeholder="2025-02-01">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="reportType" class="form-label">Report Type</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select</option>
+                                                <option value="1">Report 1</option>
+                                                <option value="2">Report 2</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-primary">Submit</button>
+
+                                            <!-- <button type="submit" class="btn btn-secondary">Submit</button> -->
+                                            <button type="button" class="btn btn-secondary"
+                                                id="downloadBtn">Download</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div> <!-- end row-->
+
+
+        <%- contentFor('FooterJs') %>
+            <!-- Datatables js -->
+            <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+            <script src="assets/vendor/select2/js/select2.min.js"></script>
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+            <script src="assets/js/pages/demo.flatpickr.js"></script>
+            <script src="assets/vendor/daterangepicker/moment.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+            <!-- Datatable Demo Aapp js -->
+            <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+            <script>
+                $(document).ready(function () {
+                    flatpickr("#basic-datepicker, #basic-datepicker2", {
+                        dateFormat: "Y-m-d"
+                    });
+                });
+
+                $(document).ready(() => {
+                    $('.select3').select2({
+                        width: '100%',
+                        dropdownParent: $('#offcanvasRight')
+                    })
+                })
+
+                var a = $("#users_table").DataTable({
+                    lengthChange: !1,
+                    buttons: ["copy", "print", "excel", "csv", "pdf"],
+                    language: {
+                        paginate:
+                        {
+                            previous: "<i class='ri-arrow-left-s-line'>",
+                            next: "<i class='ri-arrow-right-s-line'>"
+                        }
+                    },
+                    drawCallback: function () {
+                        $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                    }
+                });
+                a.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+            </script>

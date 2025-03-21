@@ -1,0 +1,294 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <%- contentFor('body') %>
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Account Management</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body" style="max-width: 90%; margin: 0 auto;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                            </div>
+                        </div>
+                        <h4 class="text-center mt-3 mb-3">Account Edit-Maker</h4>
+                        <hr class="border-3 border-dark">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="accountNo" class="form-label">Account No:</label>
+                                    <input type="number" class="form-control" id="accountNo" name="accountNo" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="company" class="form-label">Company*:</label>
+                                    <select class="form-control select2" data-toggle="select2">
+                                        <option value="">Select Company</option>
+                                        <option value="1">Company 1</option>
+                                        <option value="2">Company 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyNameCard" class="form-label">Company Name on
+                                        Card*:</label>
+                                    <input type="text" class="form-control" id="companyNameCard" name="companyNameCard"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="legalName" class="form-label">Legal Name*:</label>
+                                    <input type="text" class="form-control" id="legalName" name="legalName" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="natureOfBusiness" class="form-label">Nature Of Business:</label>
+                                    <input type="text" class="form-control" id="natureOfBusiness"
+                                        name="natureOfBusiness">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="entity" class="form-label">Entity*:</label>
+                                    <select class="form-control select2" data-toggle="select2">
+                                        <option value="">Select Entity</option>
+                                        <option value="1">Entity 1</option>
+                                        <option value="2">Entity 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyAddress1" class="form-label">Company Address 1*:</label>
+                                    <input type="text" class="form-control" id="companyAddress1" name="companyAddress1"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyAddress2" class="form-label">Company Address 2:</label>
+                                    <input type="text" class="form-control" id="companyAddress2" name="companyAddress2">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyAddress3" class="form-label">Company Address 3:</label>
+                                    <input type="text" class="form-control" id="companyAddress3" name="companyAddress3">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="city" class="form-label">City*:</label>
+                                    <select class="form-control select2" data-toggle="select2">
+                                        <option value="">Select Company</option>
+                                        <option value="1">City 1</option>
+                                        <option value="2">City 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyPhone1" class="form-label">Company Phone 1:</label>
+                                    <input type="tel" class="form-control" id="companyPhone1" name="companyPhone1">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="companyPhone2" class="form-label">Company Phone 2:</label>
+                                    <input type="tel" class="form-control" id="companyPhone2" name="companyPhone2">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="mobile" class="form-label">Mobile #*:</label>
+                                    <input type="tel" class="form-control" id="mobile" name="mobile" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address*:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="fax" class="form-label">Fax #:</label>
+                                    <input type="text" class="form-control" id="fax" name="fax">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="contactPerson" class="form-label">Contact Person*:</label>
+                                    <input type="text" class="form-control" id="contactPerson" name="contactPerson"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="contactDesignation" class="form-label">Contact
+                                        Designation*:</label>
+                                    <input type="text" class="form-control" id="contactDesignation"
+                                        name="contactDesignation" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="ntn" class="form-label">NTN #:</label>
+                                    <input type="text" class="form-control" id="ntn" name="ntn">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="salesTaxReg" class="form-label">Sales Tax Reg.:</label>
+                                    <input type="text" class="form-control" id="salesTaxReg" name="salesTaxReg">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="authorizedSignatory" class="form-label">Authorized
+                                        Signatory*:</label>
+                                    <input type="text" class="form-control" id="authorizedSignatory"
+                                        name="authorizedSignatory" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="authDesig" class="form-label">Auth Desig*:</label>
+                                    <input type="text" class="form-control" id="authDesig" name="authDesig" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="dueDate" class="form-label">Due Date*:</label>
+                                    <input type="text" id="basic-datepicker" class="form-control" placeholder="Date">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Billing Frequency*:</label>
+                                    <div class="mt-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="billingFrequency"
+                                                id="monthly" value="monthly" required>
+                                            <label class="form-check-label" for="monthly">Monthly</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="billingFrequency"
+                                                id="fortnightly" value="fortnightly">
+                                            <label class="form-check-label" for="fortnightly">Fortnightly</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="creditLimit" class="form-label">Credit Limit*:</label>
+                                    <input type="number" class="form-control" id="creditLimit" name="creditLimit"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="serviceCharges" class="form-label">Service Charges*:</label>
+                                    <input type="number" class="form-control" id="serviceCharges" name="serviceCharges"
+                                        required>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button type="button" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-soft-dark">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+        </div><!-- end col-->
+        </div> <!-- end row-->
+
+
+        <%- contentFor('FooterJs') %>
+            <!-- Datatables js -->
+            <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+            <script src="assets/vendor/select2/js/select2.min.js"></script>
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+            <!-- Timepicker Demo js -->
+            <script src="assets/js/pages/demo.flatpickr.js"></script>
+
+            <!-- Datatable Demo Aapp js -->
+            <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+            <script>
+                flatpickr("#range-datepicker", {
+                    mode: "range",
+                    dateFormat: "d-m-Y"
+                });
+
+
+                $(document).ready(() => {
+                    $('.select3').select2({
+                        width: '100%',
+                        dropdownParent: $('#offcanvasRight')
+
+                    })
+                })
+
+
+                var a = $("#users_table").DataTable({
+                    lengthChange: !1,
+                    buttons: ["copy", "print", "excel", "csv", "pdf"],
+                    language: {
+                        paginate:
+                        {
+                            previous: "<i class='ri-arrow-left-s-line'>",
+                            next: "<i class='ri-arrow-right-s-line'>"
+                        }
+                    },
+                    drawCallback: function () {
+                        $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                    }
+                });
+                a.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+            </script>

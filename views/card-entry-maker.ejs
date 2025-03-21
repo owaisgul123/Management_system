@@ -1,0 +1,1213 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <%- contentFor('body') %>
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Card Management</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <button class="btn btn-soft-success" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                <i class="fas fa-plus"></i> Create
+                            </button>
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel" style="width: 75%; padding: 10px;">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel" style="font-size: 20px;">Create
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <hr>
+                            <div class="offcanvas-body">
+                                <div class="row mb-3">
+                                    <form id="card_entry_form">
+                                        <div class="row mb-3">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label class="form-label" for="card">Card</label>
+                                                <input type="text" class="form-control" id="card" name="card" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label class="form-label" for="selec_batch">Select Batch</label>
+                                                <select class="form-control select3" id="selec_batch" name="selec_batch"
+                                                    required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="category_type">Category Type</label>
+                                                <select class="form-control select3" id="category_type"
+                                                    name="category_type" required>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="selec_comp">Select Company</label>
+                                                <select class="form-control select3" id="selec_comp" name="selec_comp"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="card_type">Card Type</label><br>
+                                                <select class="form-control select3" id="card_type" name="card_type_id"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="plastic_type">Plastic Type</label><br>
+                                                <select class="form-control select3" id="plastic_type"
+                                                    name="plastic_type_id" required>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="total_cards">Total Card</label>
+                                                <input type="text" class="form-control" id="total_cards"
+                                                    name="total_cards">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="selec_acc">Select Account</label>
+                                                <select class="from-control select3" name="selec_acc" id="selec_acc"
+                                                    required>
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="first_name">First Name</label>
+                                                <input type="text" class="form-control" id="first_name"
+                                                    name="first_name">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="last_name">Last Name</label>
+                                                <input type="text" class="form-control" id="last_name" name="last_name">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="dob" class="form-label">Date of Birth</label>
+                                                <input type="text" id="create-datepicker" class="form-control"
+                                                    name="dob" placeholder="Enter Date Of Birth">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Marital Status</label><br>
+                                                <label class="form-check-label"
+                                                    for="marital_status_single">Single</label>
+                                                <input type="radio" id="marital_status_single" name="marital_status"
+                                                    value="Single" class="form-check-input">
+                                                <label class="form-check-label"
+                                                    for="marital_status_married">Married</label>
+                                                <input type="radio" id="marital_status_married" name="marital_status"
+                                                    value="Married" class="form-check-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="address">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Gender</label><br>
+                                                <label class="form-check-label" for="gender_male">Male</label>
+                                                <input type="radio" id="gender_male" name="gender" value="Male"
+                                                    class="form-check-input">
+                                                <label class="form-check-label" for="gender_female">Female</label>
+                                                <input type="radio" id="gender_female" name="gender" value="Female"
+                                                    class="form-check-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="city">City</label>
+                                                <input type="text" class="form-control" id="city" name="city">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="cnic">CNIC</label>
+                                                <input type="text" class="form-control" id="cnic" name="cnic">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="msisdn">MSISDN</label>
+                                                <input type="text" class="form-control" id="msisdn" name="msisdn">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="email">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="batch_desc">Batch Desc</label>
+                                                <select class="form-control select3" id="batch_desc" name="batch_desc">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Card Products</label><br>
+                                                <!-- <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="product"
+                                                        name="products_id" value="product">
+                                                    <label class="form-check-label" for="product">Product</label>
+                                                </div> -->
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="diesel"
+                                                        name="products_id" value="2">
+                                                    <label class="form-check-label" for="diesel">Diesel</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="hasron"
+                                                        name="products_id" value="3">
+                                                    <label class="form-check-label" for="hasron">Hasron</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <h4 class="text-center mb-4">Card Limits</h4> -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="daily_freq">Daily Frequency</label>
+                                                <input type="number" class="form-control" id="daily_freq"
+                                                    name="daily_freq" placeholder="Enter daily frequency">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="weekly_freq">Weekly Frequency</label>
+                                                <input type="number" class="form-control" id="weekly_freq"
+                                                    name="weekly_freq" placeholder="Enter weekly frequency">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Limit Type</label><br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="limit_type_amount"
+                                                        name="limit_type" value="amount">
+                                                    <label class="form-check-label"
+                                                        for="limit_type_amount">Amount</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                        id="limit_type_quantity" name="limit_type" value="quantity">
+                                                    <label class="form-check-label"
+                                                        for="limit_type_quantity">Quantity</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="txn_limit">Transaction Limit</label>
+                                                <input type="number" class="form-control" id="txn_limit"
+                                                    name="txn_limit" placeholder="Transaction Limit">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="daily_limit">Daily Limit</label>
+                                                <input type="number" class="form-control" id="daily_limit"
+                                                    name="daily_limit" placeholder="Daily Limit">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="weekly_limit">Weekly Limit</label>
+                                                <input type="number" class="form-control" id="weekly_limit"
+                                                    name="weekly_limit" placeholder="Weekly Limit">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="monthly_limit">Monthly Limit</label>
+                                                <input type="number" class="form-control" id="monthly_limit"
+                                                    name="monthly_limit" placeholder="Monthly Limit">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label" for="non_fuel_limit">Non Fuel Limit</label>
+                                                <input type="number" class="form-control" id="non_fuel_limit"
+                                                    name="non_fuel_limit" placeholder="Non Fuel Limit">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-primary rounded-pill">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div> <!-- end card body-->
+                        <div card-body style="overflow: auto;">
+                            <table id="users_table" class="table table-striped nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Card</th>
+                                        <th>Batch</th>
+                                        <th>Category type</th>
+                                        <th>Company</th>
+                                        <th>Card Type</th>
+                                        <th>Plastic type</th>
+                                        <th>Total Cards</th>
+                                        <th>Account</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>DOB</th>
+                                        <th>Martial Status</th>
+                                        <th>Address</th>
+                                        <th>Gender</th>
+                                        <th>City</th>
+                                        <th>CNIC</th>
+                                        <th>MSISDN</th>
+                                        <th>Email</th>
+                                        <!-- <th>Product</th> -->
+                                        <!-- <th>Daily Frequency</th>
+                                        <th>Weekly Frequency</th>
+                                        <th>Limit Type</th>
+                                        <th>Transaction Limit</th>
+                                        <th>Daliy Limit</th>
+                                        <th>Weekly Limit</th>
+                                        <th>Monthly_limit</th>
+                                        <th>Non_fuel_limit</th> -->
+                                        <th>Delete</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div> <!-- end row-->
+
+                <!-- edit form -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="editUserOffcanvas"
+                    aria-labelledby="editUseroffcanvasLabel" style="width: 75%; padding: 10px;">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel" style="font-size: 20px;">Edit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <hr>
+                    <div class="offcanvas-body">
+                        <div class="row mb-3">
+                            <form id="card_edit_form">
+                                <div class="row mb-3">
+                                    <div class="col-sm-12 col-md-6">
+                                        <label class="form-label" for="ed_card">Card</label>
+                                        <input type="text" class="form-control" id="ed_card" name="card">
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <label class="form-label" for="ed_selec_batch">Select Batch</label>
+                                        <select class="form-control select4" id="ed_selec_batch" name="selec_batch"
+                                            required>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_category_type">Category Type</label>
+                                        <select class="form-control select4" id="ed_category_type" name="category_type"
+                                            required>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_selec_comp">Select Company</label>
+                                        <select class="form-control select4" id="ed_selec_comp" name="selec_comp">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_card_type">Card Type</label><br>
+                                        <select class="form-control select4" id="ed_card_type" name="card_type_id">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_plastic_type">Plastic Type</label><br>
+                                        <select class="form-control select4" id="ed_plastic_type"
+                                            name="plastic_type_id">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_total_cards">Total Card</label>
+                                        <input type="text" class="form-control" id="ed_total_cards" name="total_cards">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_selec_acc">Select Account</label>
+                                        <select class="form-control select4" id="ed_selec_acc" name="selec_acc">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_first_name">First Name</label>
+                                        <input type="text" class="form-control" id="ed_first_name" name="first_name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_last_name">Last Name</label>
+                                        <input type="text" class="form-control" id="ed_last_name" name="last_name">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="ed_dob" class="form-label">Date of Birth</label>
+                                        <input type="text" id="edit-datepicker" class="form-control" name="dob">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Marital Status</label><br>
+                                        <label class="form-check-label" for="ed_marital_status_single">Single</label>
+                                        <input type="radio" id="ed_marital_status_single" name="marital_status"
+                                            value="Single" class="form-check-input">
+                                        <label class="form-check-label" for="ed_marital_status_married">Married</label>
+                                        <input type="radio" id="ed_marital_status_married" name="marital_status"
+                                            value="Married" class="form-check-input">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_address">Address</label>
+                                        <input type="text" class="form-control" id="ed_address" name="address">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Gender</label><br>
+                                        <label class="form-check-label" for="ed_gender_male">Male</label>
+                                        <input type="radio" id="ed_gender_male" name="gender" value="Male"
+                                            class="form-check-input">
+                                        <label class="form-check-label" for="ed_gender_female">Female</label>
+                                        <input type="radio" id="ed_gender_female" name="gender" value="Female"
+                                            class="form-check-input">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_city">City</label>
+                                        <input type="text" class="form-control" id="ed_city" name="city">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_cnic">CNIC</label>
+                                        <input type="text" class="form-control" id="ed_cnic" name="cnic">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_msisdn">MSISDN</label>
+                                        <input type="text" class="form-control" id="ed_msisdn" name="msisdn">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_email">Email</label>
+                                        <input type="email" class="form-control" id="ed_email" name="email">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_batch_desc">Batch Desc</label>
+                                        <select class="form-control select4" id="ed_batch_desc" name="batch_desc">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Card Products</label><br>
+                                        <!-- <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="ed_product"
+                                                name="products_id" value="product">
+                                            <label class="form-check-label" for="ed_product">Product</label>
+                                        </div> -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="ed_diesel"
+                                                name="products_id" value="2">
+                                            <label class="form-check-label" for="ed_diesel">Diesel</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="ed_hasron"
+                                                name="products_id" value="3">
+                                            <label class="form-check-label" for="ed_hasron">Hasron</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_daily_freq">Daily Frequency</label>
+                                        <input type="number" class="form-control" id="ed_daily_freq" name="daily_freq"
+                                            placeholder="Enter daily frequency">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_weekly_freq">Weekly Frequency</label>
+                                        <input type="number" class="form-control" id="ed_weekly_freq" name="weekly_freq"
+                                            placeholder="Enter weekly frequency">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Limit Type</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="ed_limit_type_amount"
+                                                name="limit_type" value="amount">
+                                            <label class="form-check-label" for="ed_limit_type_amount">Amount</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="ed_limit_type_quantity"
+                                                name="limit_type" value="quantity">
+                                            <label class="form-check-label"
+                                                for="ed_limit_type_quantity">Quantity</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_txn_limit">Transaction Limit</label>
+                                        <input type="number" class="form-control" id="ed_txn_limit" name="txn_limit"
+                                            placeholder="Transaction Limit">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_daily_limit">Daily Limit</label>
+                                        <input type="number" class="form-control" id="ed_daily_limit" name="daily_limit"
+                                            placeholder="Daily Limit">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_weekly_limit">Weekly Limit</label>
+                                        <input type="number" class="form-control" id="ed_weekly_limit"
+                                            name="weekly_limit" placeholder="Weekly Limit">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_monthly_limit">Monthly Limit</label>
+                                        <input type="number" class="form-control" id="ed_monthly_limit"
+                                            name="monthly_limit" placeholder="Monthly Limit">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_non_fuel_limit">Non Fuel Limit</label>
+                                        <input type="number" class="form-control" id="ed_non_fuel_limit"
+                                            name="non_fuel_limit" placeholder="Non Fuel Limit">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_card_name">Card Name</label>
+                                        <input type="text" class="form-control" id="ed_card_name" name="card_name"
+                                            placeholder="Enter Card Name">
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_card_issuance">Card Issuance</label>
+                                        <input type="text" class="form-control" id="ed_card_issuance"
+                                            name="card_issuance" placeholder="Enter Card Issuance">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_card_expiry">Card Expiry</label>
+                                        <input type="text" class="form-control" id="ed_card_expiry" name="card_expiry"
+                                            placeholder="Enter Card Expiry">
+                                    </div>
+                                </div> 
+                                   <div class="col-md-6">
+                                        <label class="form-label" for="ed_last_maintenance">Last Maintenance</label>
+                                        <input type="text" class="form-control" id="ed_last_maintenance"
+                                            name="last_maintenance" placeholder="Enter Last Maintenance">
+                                    </div> 
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_pin_enabled">Pin Enabled</label>
+                                        <input type="text" class="form-control" id="ed_pin_enabled" name="pin_enabled"
+                                            placeholder="Enter Pin Enabled">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_card_tracking">Card Tracking</label>
+                                        <input type="text" class="form-control" id="ed_card_tracking"
+                                            name="card_tracking" placeholder="Enter Card Tracking">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="ed_loyalty_points">Loyalty Points</label>
+                                        <input type="text" class="form-control" id="ed_loyalty_points"
+                                            name="loyalty_points" placeholder="Enter Loyalty Points">
+                                    </div>
+                                </div> -->
+
+                                <div class="mb-3 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary rounded-pill">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- contentFor('FooterJs') %>
+                    <!-- Datatables js -->
+                    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+                    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                    <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+                    <script
+                        src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+                    <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+                    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+                    <script src="assets/vendor/select2/js/select2.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="assets/vendor/jquery-mask-plugin/jquery.mask.min.js"></script>
+                    <script src="assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+                    <script src="assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+                    <script src="assets/vendor/handlebars/handlebars.min.js"></script>
+                    <script src="assets/vendor/typeahead.js/typeahead.bundle.min.js"></script>
+                    <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+                    <script src="assets/js/pages/demo.flatpickr.js"></script>
+                    <script src="assets/js/pages/demo.typehead.js"></script>
+                    <script src="assets/vendor/daterangepicker/moment.min.js"></script>
+                    <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+                    <!-- Datatable Demo Aapp js -->
+                    <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+                    <script>
+
+                        function fetchData(apiUrl, dropdownId, nameField, param = null) {
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log("API Response:", data);
+
+                                    let dropdown = document.getElementById(dropdownId);
+                                    if (!dropdown) {
+                                        console.warn(`⚠️ Dropdown with ID "${dropdownId}" not found.`);
+                                        return;
+                                    }
+
+                                    // ✅ Pehle Select2 Destroy Karo taake duplicate issue na ho (agar element hai tabhi)
+                                    if ($(`#${dropdownId}`).hasClass("select2-hidden-accessible")) {
+                                        $(`#${dropdownId}`).select2("destroy");
+                                    }
+
+                                    dropdown.innerHTML = '<option value="">Select</option>';
+
+                                    // ✅ API response ko better handle kar rahe hain
+                                    let records = Array.isArray(data.data) ? data.data : (Array.isArray(data) ? data : []);
+
+                                    if (records.length > 0) {
+                                        records.forEach(item => {
+                                            let option = document.createElement("option");
+
+                                            // ✅ Param-based Handling
+                                            if (param == "1" && item.card_name && item.card_type_id) {
+                                                option.value = item.card_type_id;
+                                                option.textContent = item.card_name;
+                                            } else if (param == "2" && item.plastic_type_id) {
+                                                option.value = item.plastic_type_id;
+                                                option.textContent = item.plastic_name;
+                                            } else if (param == "3" && item.category_type) {
+                                                option.value = item.category_type;
+                                                option.textContent = item.category_type;
+                                            } else if (param == "4" && item.company_name && item.id) {
+                                                option.value = item.id;
+                                                option.textContent = item.company_name;
+                                            } else if (nameField in item) {
+                                                option.value = item[nameField];
+                                                option.textContent = item[nameField];
+                                            }
+
+                                            dropdown.appendChild(option);
+                                        });
+
+                                        // ✅ Select2 Initialize only if element is present
+                                        setTimeout(() => {
+                                            if ($(`#${dropdownId}`).length) {
+                                                let parentDropdown = null;
+
+                                                if ($(`#${dropdownId}`).hasClass("select3")) {
+                                                    parentDropdown = $('#offcanvasRight');
+                                                } else if ($(`#${dropdownId}`).hasClass("select4")) {
+                                                    parentDropdown = $('#editUserOffcanvas');
+                                                }
+
+                                                $(`#${dropdownId}`).select2({
+                                                    width: '100%',
+                                                    dropdownParent: parentDropdown || null
+                                                });
+                                            }
+                                        }, 200); // Delay increased to 200ms for better UI performance
+                                    } else {
+                                        console.warn(`⚠️ No data received for ${dropdownId}`);
+                                    }
+                                })
+                                .catch(error => console.error(`Error fetching data from ${apiUrl}:`, error));
+                        }
+
+
+                        function fetchBatch(apiUrl, dropdownId, nameField) {
+                            fetch(apiUrl)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log("API Response:", data);
+
+                                    let dropdown = document.getElementById(dropdownId);
+                                    dropdown.innerHTML = '<option value="">Select</option>';  // Default "Select" option
+
+                                    // ✅ Check if API returned success status and data is an array
+                                    if (data.status === "success" && Array.isArray(data.data)) {
+                                        data.data.forEach(item => {
+                                            let option = document.createElement("option");
+
+                                            // Ensure that batch_no and nameField (like batch_decrp) are not null or empty
+                                            if (item.batch_no !== null && item[nameField] !== null) {
+                                                option.value = item.id;  // Use the 'id' as the value for foreign key reference
+                                                option.textContent = item[nameField];
+                                                dropdown.appendChild(option);
+                                            }
+                                        });
+                                    } else {
+                                        console.error("Error: API did not return a valid data array", data);
+                                    }
+                                })
+                                .catch(error => console.error("Error fetching data:", error));
+                        }
+
+                        document.addEventListener("DOMContentLoaded", function () {
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php", "selec_comp", "company_name", 4);
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php", "selec_acc", "acc_no");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "batch_desc", "batch_decrip");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/card_types/all_ctypes.php", "card_type", "card_name", 1);
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/plastic_types/all_ptypes.php", "plastic_type", "plastic_name", 2);
+
+                            fetchBatch("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "selec_batch", "batch_no");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "category_type", "category", 3);
+                        });
+
+
+                        $("#card_edit_form, #card_entry_form").submit(function (event) {
+                            event.preventDefault(); // Prevent default form submission
+
+                            let formData = new FormData(this);
+
+                            // Dynamically determine the action based on form id
+                            let formId = $(this).attr('id');
+                            // let url = "";
+
+                            if (formId === "card_edit_form") {
+                                url = "https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_edit.php";
+                            } else if (formId === "card_entry_form") {
+                                url = "https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_entry.php";
+                            }
+
+                            $.ajax({
+                                url: url,
+                                method: "POST",
+                                processData: false,
+                                contentType: false,
+                                data: formData,
+                                success: function (response, textStatus, xhr) {
+                                    if (xhr.status >= 200 && xhr.status < 300) {
+                                        try {
+                                            let jsonResponse = JSON.parse(response);
+
+                                            if (formId === "card_edit_form") {
+                                                showPopup("Success!", "Card updated successfully", "success");
+                                                fetchtable();
+                                            } else if (formId === "card_entry_form") {
+                                                if (jsonResponse.status === "success") {
+                                                    showPopup("Success!", jsonResponse.message || "Card entry created successfully", "success");
+                                                    fetchtable();
+
+                                                } else {
+                                                    showPopup("Error!", jsonResponse.message || "Something went wrong while creating entry", "error");
+                                                }
+                                            }
+                                        } catch (e) {
+                                            // If the response is not JSON, handle it as a plain text response
+                                            if (formId === "card_edit_form") {
+                                                showPopup("Success!", "Card updated successfully!", "success");
+                                            } else if (formId === "card_entry_form") {
+                                                showPopup("Success!", "Card entry created successfully!", "success");
+                                            }
+                                        }
+                                    } else if (xhr.status === 409) {
+                                        showPopup("Conflict!", response.message || "Account number or Email already exists", "warning");
+                                    }
+
+                                },
+                                error: function (xhr) {
+                                    // console.log(xhr);
+                                    let message = "An Error Occurred. Please try again.";
+                                    let icon = "error";
+
+                                    if (xhr.status === 500) {
+                                        message = "Database insert error";
+                                    } else if (xhr.status === 409) {
+                                        message = "Error: Conflict detected!";
+                                        icon = "warning";
+                                    } else if (xhr.status === 404) {
+                                        message = "Error: Resource not found!";
+                                    }
+                                    showPopup("Error!", message, icon);
+                                },
+                            });
+                        });
+
+                        function createData() {
+                            var form = new FormData();
+
+                            form.append("card", document.getElementById("card")?.value || "");
+                            form.append("selec_batch", document.getElementById("selec_batch")?.value || "");
+                            form.append("selec_comp", document.getElementById("selec_comp")?.value || "");
+                            form.append("selec_acc", document.getElementById("selec_acc")?.value || "");
+                            form.append("total_cards", document.getElementById("total_cards")?.value || "");
+                            form.append("first_name", document.getElementById("first_name")?.value || "");
+                            form.append("last_name", document.getElementById("last_name")?.value || "");
+                            form.append("dob", document.getElementById("create-datepicker")?.value || "");
+                            form.append("address", document.getElementById("address")?.value || "");
+                            form.append("city", document.getElementById("city")?.value || "");
+                            form.append("cnic", document.getElementById("cnic")?.value || "");
+                            form.append("msisdn", document.getElementById("msisdn")?.value || "");
+                            form.append("email", document.getElementById("email")?.value || "");
+                            form.append("category_type", document.getElementById("category_type")?.value || "");
+                            form.append("card_type_id", document.getElementById("card_type")?.value || "");
+                            form.append("plastic_type_id", document.getElementById("plastic_type")?.value || "");
+                            form.append("batch_desc", document.getElementById("batch_desc")?.value || "");
+
+                            // Radio button values
+                            form.append("marital_status", document.querySelector('[name="marital_status"]:checked')?.value || "");
+                            form.append("gender", document.querySelector('[name="gender"]:checked')?.value || "");
+                            form.append("limit_type", document.querySelector('[name="limit_type"]:checked')?.value || "");
+
+                            // Checkbox values (comma-separated instead of JSON)
+                            let selectedProducts = [...document.querySelectorAll('[name="products_id"]:checked')].map(cb => cb.value).join(",");
+                            form.append("products_id", selectedProducts);
+
+                            // Limit values
+                            form.append("daily_freq", document.getElementById("daily_freq")?.value || "");
+                            form.append("weekly_freq", document.getElementById("weekly_freq")?.value || "");
+                            form.append("txn_limit", document.getElementById("txn_limit")?.value || "");
+                            form.append("daily_limit", document.getElementById("daily_limit")?.value || "");
+                            form.append("weekly_limit", document.getElementById("weekly_limit")?.value || "");
+                            form.append("monthly_limit", document.getElementById("monthly_limit")?.value || "");
+                            form.append("non_fuel_limit", document.getElementById("non_fuel_limit")?.value || "");
+
+                            // AJAX Request
+                            $.ajax({
+                                url: "https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_entry.php",
+                                method: "POST",
+                                timeout: 0,
+                                processData: false,
+                                contentType: false,
+                                data: form
+                            })
+                                .done(function (response, textStatus, xhr) {
+                                    let statusCode = xhr.status;
+                                    if (statusCode === 201) {
+                                        showPopup("Success!", "Record added successfully.", "success");
+
+                                        // Form reset
+                                        document.getElementById("card_entry_form").reset();
+
+                                        // Close offcanvas if applicable
+                                        var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasRight'));
+                                        offcanvas.hide();
+
+                                        // Refresh table
+                                        fetchtable();
+                                    } else {
+                                        showPopup("Error!", "There was an error adding the record.", "error");
+                                    }
+                                })
+                                .fail(function (xhr) {
+                                    let statusCode = xhr.status;
+                                    let message = "An Error Occurred, please try again!";
+                                    let icon = "error";
+
+                                    if (statusCode === 409) {
+                                        message = "Error: Conflict detected!";
+                                        icon = "warning";
+                                    } else if (statusCode === 404) {
+                                        message = "Error: Resource not found!";
+                                    }
+
+                                    showPopup("Error!", message, icon);
+                                });
+                        }
+
+                        // Function to show pop-up messages using SweetAlert
+                        function showPopup(title, message, icon) {
+                            Swal.fire({
+                                title: title,
+                                text: message,
+                                icon: icon,
+                                confirmButtonText: "OK"
+                            });
+                        }
+
+                        $(document).ready(() => {
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php", "ed_selec_comp", "company_name", "4");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php", "ed_selec_acc", "acc_no");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "ed_batch_desc", "batch_decrip");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/card_types/all_ctypes.php", "ed_card_type", "card_name", "1");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/plastic_types/all_ptypes.php", "ed_plastic_type", "plastic_name", "2");
+
+                            fetchBatch("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "ed_selec_batch", "batch_no");
+
+                            fetchData("https://hungry-chaum.92-205-119-218.plesk.page/batch_management/all_batch.php", "ed_category_type", "category", "3");
+
+                            // Create form datepicker
+                            $("#create-datepicker").flatpickr({
+                                dateFormat: "Y-m-d"
+                            });
+
+                            // Edit form datepicker
+                            $("#edit-datepicker").flatpickr({
+                                dateFormat: "Y-m-d" // Correct format
+                            });
+
+                            $('.select4').select2({
+                                width: '100%',
+                                dropdownParent: $('#editUserOffcanvas')
+                            });
+
+                            // Initialize select2 for dropdown
+                            $('.select3').select2({
+                                width: '100%',
+                                dropdownParent: $('#offcanvasRight')
+                            });
+
+                            // Initialize DataTable
+                            table = $("#users_table").DataTable({
+                                lengthChange: false,
+                                buttons: ["copy", "print", "excel", "csv", "pdf"],
+                                language: {
+                                    paginate: {
+                                        previous: "<i class='ri-arrow-left-s-line'>",
+                                        next: "<i class='ri-arrow-right-s-line'>"
+                                    }
+                                },
+                                drawCallback: function () {
+                                    $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                                }
+                            });
+
+                            table.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+                            // Fetch data on page load
+                            fetchtable();
+                        });
+                        function fetchtable() {
+                            var settings = {
+                                url: "https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/all_records.php",
+                                method: "GET",
+                                dataType: "json",
+                            };
+
+                            $.ajax(settings).done(function (response) {
+                                console.log(response);
+
+                                // Clear existing table data
+                                table.clear().draw();
+
+                                // Loop through the response data and add rows to the table
+                                response.data.forEach((data, index) => {
+                                    table.row.add([
+                                        index + 1, // Serial number
+                                        data.card || 'N/A',
+                                        data.selec_batch || 'N/A',
+                                        data.category_type || 'N/A',
+                                        data.selec_comp || 'N/A',
+                                        data.card_type_id || 'N/A',
+                                        data.plastic_type_id || 'N/A',
+                                        data.total_cards || 'N/A',
+                                        data.selec_acc || 'N/A',
+                                        data.first_name || 'N/A',
+                                        data.last_name || 'N/A',
+                                        data.dob || 'N/A',
+                                        data.marital_status || 'N/A',
+                                        data.address || 'N/A',
+                                        data.gender || 'N/A',
+                                        data.city || 'N/A',
+                                        data.cnic || 'N/A',
+                                        data.msisdn || 'N/A',
+                                        data.email || 'N/A',
+                                        // data.products_id || 'N/A',
+                                        // data.daily_freq || 'N/A',
+                                        // data.weekly_freq || 'N/A',
+                                        // data.limit_type || 'N/A',
+                                        // data.txn_limit || 'N/A',
+                                        // data.daily_limit || 'N/A',
+                                        // data.weekly_limit || 'N/A',
+                                        // data.monthly_limit || 'N/A',
+                                        // data.non_fuel_limit || 'N/A',
+                                        `<button type="button" onclick="deleteData('${data.card}')" class="btn btn-soft-danger"><i class="bx bx-trash-alt font-size-16 align-middle"></i></button>`,
+                                        `<button type="button" onclick="editData('${data.card}')" class="btn btn-soft-warning" edit-btn><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>`
+                                    ]).draw(false);
+                                });
+
+                            }).fail(function (error) {
+                                console.error("Error fetching data: ", error);
+                            });
+                        }
+
+
+                        // Function to delete data
+                        function deleteData(userId) {
+                            let form = new FormData();
+                            form.append('card', userId);
+
+                            $.ajax({
+                                url: "https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_dlte.php",
+                                method: "POST",
+                                processData: false,
+                                contentType: false,
+                                data: form,
+                                success: function (response, textStatus, xhr) {
+                                    if (xhr.status === 200) {
+                                        showPopup("Success!", "Card deleted successfully", "success");
+                                        fetchtable(); // Reload table after delete
+                                    } else if (xhr.status === 404) {
+                                        showPopup("Card Not Found", "Card not found!", "warning");
+                                    }
+                                },
+                                error: function (xhr) {
+                                    let message = "An error occurred. Please try again.";
+                                    let icon = "error";
+
+                                    if (xhr.status === 500) {
+                                        message = "Database insert error";
+                                    } else if (xhr.status === 409) {
+                                        message = "Error: Conflict detected!";
+                                        icon = "warning";
+                                    } else if (xhr.status === 404) {
+                                        message = "Error: Resource not found!";
+                                    }
+
+                                    showPopup("Error!", message, icon);
+                                },
+                            });
+                        }
+
+
+                        // Function to fetch and populate card data for editing
+                        function editData(userId) {
+                            // alert(userId)
+                            if (!userId) {
+                                console.error('User ID is undefined or invalid.');
+                                Swal.fire("Error", "User ID is missing.", "error");
+                                return;
+                            }
+                            // AJAX request to fetch card data
+                            $.ajax({
+                                url: `https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_info.php?card=${userId}`,
+                                method: "GET",
+                                dataType: "json",
+                                success: function (response) {
+                                    console.log("Edit API Response: ", response);
+
+                                    if (response?.status === "success" && response.data) {
+                                        let cardData = response.data;
+
+                                        // Populating the form fields with cardData
+                                        $("#ed_card").val(cardData.card || '');
+                                        $("#ed_selec_batch").val(cardData.selec_batch || '1').trigger('change');
+                                        $("#ed_selec_comp").val(cardData.selec_comp || '').trigger('change');
+                                        $("#ed_card_type").val(cardData.card_type_id || '').trigger('change');
+                                        $("#ed_plastic_type").val(cardData.plastic_type_id || '').trigger('change');
+                                        $("#ed_total_cards").val(cardData.total_cards || '');
+                                        $("#ed_selec_acc").val(cardData.selec_acc || '').trigger('change');
+                                        $("#ed_first_name").val(cardData.first_name || '');
+                                        $("#ed_last_name").val(cardData.last_name || '');
+                                        $("#edit-datepicker").val(cardData.dob || '');
+                                        $("#ed_address").val(cardData.address || '');
+                                        $("#ed_city").val(cardData.city || '');
+                                        $("#ed_cnic").val(cardData.cnic || '');
+                                        $("#ed_msisdn").val(cardData.msisdn || '');
+                                        $("#ed_email").val(cardData.email || '');
+                                        $("#ed_batch_desc").val(cardData.batch_desc || '').trigger('change');
+                                        $("#ed_txn_limit").val(cardData.txn_limit || '');
+                                        $("#ed_daily_limit").val(cardData.daily_limit || '');
+                                        $("#ed_weekly_limit").val(cardData.weekly_limit || '');
+                                        $("#ed_monthly_limit").val(cardData.monthly_limit || '');
+                                        $("#ed_non_fuel_limit").val(cardData.non_fuel_limit || '');
+                                        $("#ed_daily_freq").val(cardData.daily_freq || '');
+                                        $("#ed_weekly_freq").val(cardData.weekly_freq || '');
+                                        $("#ed_card_issuance").val(cardData.card_issuance || '');
+                                        $("#ed_card_expiry").val(cardData.card_expiry || '');
+                                        $("#ed_card_name").val(cardData.card_name || '');
+                                        $("#ed_last_maintenance").val(cardData.last_maintenance || '');
+                                        $("#ed_pin_enabled").val(cardData.pin_enabled || '');
+                                        $("#ed_card_tracking").val(cardData.card_tracking || '');
+                                        $("#ed_loyalty_points").val(cardData.loyalty_points || '');
+                                        $("#ed_category_type").val(cardData.category_type || '').trigger('change');
+
+                                        // Populating radio buttons (using conditional checks for selected values)
+                                        $(`input[name="marital_status"][value="${cardData.marital_status}"]`).prop("checked", true);
+
+                                        // $("#ed_category_type").val(cardData.category_type || ''); // Set default value if empty
+
+                                        $(`input[name="gender"][value="${cardData.gender}"]`).prop("checked", true);
+                                        $(`input[name="limit_type"][value="${cardData.limit_type}"]`).prop("checked", true);
+
+                                        // Populating checkboxes (Card Products)
+                                        $("input[name='products_id']").prop("checked", false); // Resetting all checkboxes
+                                        if (Array.isArray(cardData.products_id)) {
+                                            cardData.products_id.forEach(productId => {
+                                                $(`input[name="products_id"][value="${productId}"]`).prop("checked", true); // Marking the selected products as checked
+                                            });
+                                        }
+
+                                        // Set the user ID in the form for update
+                                        $("#card_edit_form").attr("data-user-id", userId);
+                                        // Open the offcanvas
+                                        var offcanvasElement = new bootstrap.Offcanvas(document.getElementById('editUserOffcanvas'));
+                                        offcanvasElement.show();
+                                    } else {
+                                        console.error("Error: Card data not found or response format is incorrect.");
+                                        Swal.fire("Error", "Card data not found.", "error");
+                                    }
+                                },
+                                error: function () {
+                                    Swal.fire("Error", "Failed to fetch card details.", "error");
+                                }
+                            });
+                        }
+
+                        // Function to update card data
+                        function updateData() {
+                            var userId = $("#card_edit_form").attr("data-user-id");
+                            if (!userId) {
+                                Swal.fire("Error", "Card ID is missing.", "error");
+                                return;
+                            }
+
+                            var formData = new FormData(document.getElementById("card_edit_form"));
+                            formData.append("id", userId);
+
+                            $.ajax({
+                                url: `https://hungry-chaum.92-205-119-218.plesk.page/card_entry_management/card_edit.php`,
+                                method: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (response) {
+                                    console.log("Update API Response:", response); // Check entire response
+
+                                    if (response.status === "success") {
+                                        // Success Message
+                                        Swal.fire({
+                                            title: "Success!",
+                                            text: "Card data updated successfully!",
+                                            icon: "success",
+                                            confirmButtonText: "OK"
+                                        })
+                                        fetchtable(); // Refresh the table with a slight delay
+                                        var offcanvasElement = new bootstrap.Offcanvas(document.getElementById('editUserOffcanvas'));
+                                        offcanvasElement.hide();
+
+                                    } else {
+                                        // Handle case where the status is not success, but the message indicates error
+                                        Swal.fire("Error", "Failed to update card data.", "error");
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    // More detailed error handling
+                                    console.error("Error:", error);
+                                    Swal.fire("Error", "Failed to update card data.", "error");
+                                }
+                            });
+                        }
+                    </script>

@@ -1,0 +1,618 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+
+
+    <%- contentFor('body') %>
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Card Status Maker</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <button class="btn btn-soft-success" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                <i class="fas fa-plus"></i> Create
+                            </button>
+                        </div>
+
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel" style="width: 40%">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel" style="font-size: 20px;">Create
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <hr>
+                            <div class="offcanvas-body" id="editUserForm">
+                                <!-- <div class="row mb-3" style="display: none;">
+                                    <div class="col-md-6">
+                                        <label for="selec_comp" class="form-label">Company</label>
+                                        <select id="selec_comp" class="form-control select3" data-toggle="select2"
+                                            name="selec_comp">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="selec_acc" class="form-label">Account</label>
+                                        <select id="selec_acc" class="form-control select3" data-toggle="select2"
+                                            name="selec_acc">
+                                        </select>
+                                    </div>
+                                </div> -->
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="card_number" class="form-label">Card Number</label>
+                                        <input type="text" class="form-control" id="card_number" name="card_number"
+                                            placeholder="Enter card number">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="current_card_status" class="form-label">Current Card Status</label>
+                                        <select id="current_card_status" class="form-control select3"
+                                            data-toggle="select2" name="current_card_status">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="status_types" class="form-label">Status Types</label>
+                                        <select id="status_types" class="form-control select3" data-toggle="select2"
+                                            name="status_types">
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="new_card_status" class="form-label">New Card Status</label>
+                                        <select id="new_card_status" class="form-control select3" data-toggle="select2"
+                                            name="new_card_status">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn rounded-pill btn-primary" type="submit"
+                                        onclick="createData()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="users_table" class="table table-striped-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <!-- <th>Company</th>
+                                    <th>Account</th> -->
+                                    <th>Card Number</th>
+                                    <th>Current Card Status</th>
+                                    <th>Status Type</th>
+                                    <th>New Card Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div> <!-- end row-->
+
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="editUserOffcanvas"
+            aria-labelledby="editUserOffcanvasLabel" style="width: 40%">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="editUserOffcanvasLabel" style="font-size: 20px;">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <hr>
+            <div class="offcanvas-body" id="editDataForm">
+                <!-- <div class="row mb-3" style="display: none;">
+                    <div class="col-md-6">
+                        <label for="edit_selec_comp" class="form-label">Company</label>
+                        <select id="edit_selec_comp" class="form-control select4" data-toggle="select2"
+                            name="selec_comp">
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="edit_selec_acc" class="form-label">Account</label>
+                        <select id="edit_selec_acc" class="form-control select4" data-toggle="select2" name="selec_acc">
+                        </select>
+                    </div>
+                </div> -->
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="edit_card_number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="edit_card_number" name="card_number"
+                            placeholder="Enter card number">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="edit_current_card_status" class="form-label">Current Card Status</label>
+                        <select id="edit_current_card_status" class="form-control select4" data-toggle="select2"
+                            name="current_card_status">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+                        <label for="edit_status_types" class="form-label">Status Types</label>
+                        <select id="edit_status_types" class="form-control select4" data-toggle="select2"
+                            name="status_types">
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="edit_new_card_status" class="form-label">New Card Status</label>
+                        <select id="edit_new_card_status" class="form-control select4" data-toggle="select2"
+                            name="new_card_status">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button class="btn rounded-pill btn-primary" type="submit" onclick="updateData()">Update</button>
+                </div>
+            </div>
+        </div>
+
+
+        <%- contentFor('FooterJs') %>
+            <!-- Datatables js -->
+            <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+            <script src="assets/vendor/select2/js/select2.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <!-- Datatable Demo Aapp js -->
+            <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+
+            <script>
+                function fetchData(apiUrl, dropdownId, nameField) {
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("API Response:", data);
+
+                            let dropdown = document.getElementById(dropdownId);
+                            dropdown.innerHTML = '<option value="">Select</option>';
+
+                            if (data.status === "success" && Array.isArray(data.data)) {
+                                data.data.forEach(item => {
+                                    let option = document.createElement("option");
+
+                                    // Set both the value and textContent to the actual data you want
+                                    option.value = item[nameField]; // Set value as the actual data you want (e.g., "12334455566")
+                                    option.textContent = item[nameField]; // Display the same data in the dropdown
+
+                                    dropdown.appendChild(option); // Append the option to the dropdown
+                                });
+
+                                // Reinitialize select2 after the dropdown options are added
+                                // setTimeout(() => {
+                                //     $(`#${dropdownId}`).select2();
+                                // }, 100);
+                            } else {
+                                console.error("Error: API did not return a valid data array", data);
+                            }
+                        })
+                        .catch(error => console.error("Error fetching data:", error));
+                }
+
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php", "selec_comp", "company_name");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php", "selec_acc", "acc_no");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "current_card_status", "current_card_status");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "status_types", "status_types");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "new_card_status", "new_card_status");
+
+
+                });
+
+                // // Fetch users data from API (Global Scope)
+                // function fetchtable() {
+                //     var table = $("#users_table").DataTable(); // DataTable instance
+
+                //     var settings = {
+                //         url: "https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php",
+                //         method: "GET",
+                //     };
+
+                //     $.ajax(settings).done(function (response) {
+                //         console.log("Table Refreshed: ", response);
+                //         table.clear().draw(); // Clear existing table data
+
+                //         response.data.forEach((data, index) => {
+                //             var cardNumber = data.card_number || 'N/A';
+                //             var currentCardStatus = data.current_card_status || 'N/A';
+                //             var statusTypes = data.status_types || 'N/A';
+                //             var newCardStatus = data.new_card_status || 'N/A';
+
+                //             // Add row with Edit button
+                //             table.row.add([
+                //                 data.id,
+                //                 cardNumber,
+                //                 currentCardStatus,
+                //                 statusTypes,
+                //                 newCardStatus,
+                //                 `<button type="button" id="edit" name="edit" onclick="editData(${cardNumber})" class="btn btn-soft-warning">
+                //     <i class="bx bx-edit-alt font-size-16 align-middle"></i></button>`
+                //             ]).draw(false);
+                //         });
+                //     });
+                // }
+
+                // $(document).ready(() => {
+
+                //     fetchData("https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php", "edit_selec_comp", "company_name");
+
+                //     fetchData("https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php", "edit_selec_acc", "acc_no");
+
+                //     fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_current_card_status", "current_card_status");
+
+                //     fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_status_types", "status_types");
+
+                //     fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_new_card_status", "new_card_status");
+
+
+                //     // Initialize Select2 for select3
+                //     $('.select3').select2({
+                //         width: '100%',
+                //         dropdownParent: $('#offcanvasRight')
+                //     });
+
+                //     // Initialize Select2 for select4
+                //     $('.select4').select2({
+                //         width: '100%',
+                //         dropdownParent: $('#editUserOffcanvas')
+                //     });
+
+                //     // Initialize DataTable
+                //     var table = $("#users_table").DataTable({
+                //         lengthChange: false,  // Disable length change (show number of rows)
+                //         buttons: ["copy", "print", "excel", "csv", "pdf"],  // Enable export buttons
+                //         language: {
+                //             paginate: {
+                //                 previous: "<i class='ri-arrow-left-s-line'></i>",  // Previous button icon
+                //                 next: "<i class='ri-arrow-right-s-line'></i>"  // Next button icon
+                //             }
+                //         },
+                //         drawCallback: function () {
+                //             // Add rounded pagination buttons after drawing the table
+                //             $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                //         }
+                //     });
+
+                //     // Append DataTable buttons to a specific container (if required)
+                //     table.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+
+                //     // Call a function to fetch table data (If needed)
+                //     fetchtable();
+                // });
+
+                $(document).ready(function () {
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php", "edit_selec_comp", "company_name");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php", "edit_selec_acc", "acc_no");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_current_card_status", "current_card_status");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_status_types", "status_types");
+
+                    fetchData("https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php", "edit_new_card_status", "new_card_status");
+
+                    // Initialize DataTable
+                    var table = $("#users_table").DataTable({
+                        lengthChange: false,
+                        buttons: ["copy", "print", "excel", "csv", "pdf"],
+                        language: {
+                            paginate: {
+                                previous: "<i class='ri-arrow-left-s-line'></i>",
+                                next: "<i class='ri-arrow-right-s-line'></i>"
+                            }
+                        },
+                        drawCallback: function () {
+                            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                        }
+                    });
+
+                    // Append DataTable buttons to a specific container
+                    table.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+
+                    // Fetch data
+                    fetchtable();
+                });
+
+                function fetchtable() {
+                    var table = $("#users_table").DataTable();
+
+                    var settings = {
+                        url: "https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/all_records.php",
+                        method: "GET",
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        console.log("Table Refreshed: ", response);
+                        table.clear().draw();
+
+                        response.data.forEach((data, index) => {
+                            var cardNumber = data.card_number || 'N/A';
+                            var currentCardStatus = data.current_card_status || 'N/A';
+                            var statusTypes = data.status_types || 'N/A';
+                            var newCardStatus = data.new_card_status || 'N/A';
+
+                            table.row.add([
+                                data.id,
+                                cardNumber,
+                                currentCardStatus,
+                                statusTypes,
+                                newCardStatus,
+                                `<button type="button" id="edit" name="edit" onclick="editData(${cardNumber})" class="btn btn-soft-warning">
+                                 <i class="bx bx-edit-alt font-size-16 align-middle"></i></button>`
+                            ]).draw(false);
+                        });
+
+                        $('.select3').select2({
+                            width: '100%',
+                            dropdownParent: $('#offcanvasRight')
+                        });
+
+                        $('.select4').select2({
+                            width: '100%',
+                            dropdownParent: $('#editUserOffcanvas')
+                        });
+
+                    });
+                }
+                // // ✅ Offcanvas Show Event - Reinitialize Select2
+                // $('#editUserOffcanvas').on('shown.bs.offcanvas', function () {
+                //     $('.select4').select2({
+                //         width: '100%',
+                //         dropdownParent: $('#editUserOffcanvas')
+                //     });
+                // });
+
+                // Function to update user data
+                function updateData() {
+                    var card_number = document.getElementById("edit_card_number").value;
+                    var current_card_status = document.getElementById("edit_current_card_status").value;
+                    var status_types = document.getElementById("edit_status_types").value;
+                    var new_card_status = document.querySelector("input[name='new_card_status']:checked")?.value;
+
+                    var userId = document.getElementById("editDataForm").getAttribute("data-user-id");
+
+                    var formData = {
+                        id: userId,
+                        card_number: card_number,
+                        current_card_status: current_card_status,
+                        status_types: status_types,
+                        new_card_status: new_card_status
+                    };
+
+                    $.ajax({
+                        url: "https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/card_edit.php",
+                        method: "POST",
+                        data: formData,
+                        dataType: "json",
+                        success: function (response) {
+                            console.log("Update Response: ", response);
+
+                            if (response.status === "success") {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: response.message,
+                                    icon: "success",
+                                    confirmButtonText: "OK",
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        fetchtable(); // Refresh table
+                                        var offcanvas = new bootstrap.Offcanvas(document.getElementById("editUserOffcanvas"));
+                                        offcanvas.hide();
+                                    }
+                                });
+                            } else {
+                                Swal.fire({ title: "Error!", text: "Update failed!", icon: "error", confirmButtonText: "OK" });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error updating data: ", error);
+                            Swal.fire({ title: "Error!", text: "Update failed!", icon: "error", confirmButtonText: "OK" });
+                        },
+                    });
+                }
+
+
+                function createData() {
+                    var form = new FormData();
+                    // form.append("selec_comp", document.getElementById("selec_comp").value);
+                    // form.append("selec_acc", document.getElementById("selec_acc").value);
+                    form.append("card_number", document.getElementById("card_number").value);
+                    form.append("current_card_status", document.getElementById("current_card_status").value);
+                    form.append("status_types", document.getElementById("status_types").value);
+                    form.append("new_card_status", document.getElementById("new_card_status").value);
+
+                    var settings = {
+                        "url": `https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/status_maker.php`,
+                        "method": "POST",
+                        "timeout": 0,
+                        "processData": false,
+                        "Access-Control-Allow-Headers": "*",
+                        "mimeType": "multipart/form-data",
+                        "contentType": false,
+                        "data": form
+                    };
+
+                    $.ajax(settings)
+                        .done(function (response, textStatus, xhr) {
+                            let statusCode = xhr.status; // Response status code
+
+                            if (statusCode === 201) {
+                                showPopup("Success!", "Data created successfully.", "success");
+
+                                var newUser = response.data;  // Adjust the response structure if needed
+
+                                // Dynamically add new row to the table without refresh
+                                var table = $("#users_table").DataTable();
+                                table.row.add([
+                                    newUser.id,
+                                    // newUser.selec_comp || 'N/A',
+                                    // newUser.selec_acc || 'N/A',
+                                    newUser.card_number || 'N/A',
+                                    newUser.current_card_status || 'N/A',
+                                    newUser.status_types || 'N/A',
+                                    newUser.new_card_status || 'N/A',
+                                ]).draw(false); // Add the new row without reloading the table
+
+                                // Reset the form inputs after saving
+                                resetForm();
+
+                                // Close the offcanvas after saving
+                                var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasRight'));
+                                offcanvas.hide();
+
+                            } else {
+                                showPopup("Error!", "There was an error creating the user.", "error");
+                            }
+                        })
+                        .fail(function (xhr) {
+                            let statusCode = xhr.status;
+                            let message = "An Error Occurred, please try again!";
+                            let icon = "error";
+
+                            if (statusCode === 409) {
+                                message = "Error: Conflict detected!";
+                                icon = "warning";
+                            } else if (statusCode === 404) {
+                                message = "Error: Resource not found!";
+                                icon = "error";
+                            }
+                            showPopup("Error!", message, icon);
+                        });
+                }
+
+                function showPopup(title, message, icon) {
+                    Swal.fire({
+                        title: title,
+                        text: message,
+                        icon: icon,
+                        confirmButtonText: "OK"
+                    });
+                }
+
+                // Function to edit user
+                function editData(userId) {
+                    console.log("Fetching data for Card ID:", userId);
+
+                    $.ajax({
+                        url: `https://hungry-chaum.92-205-119-218.plesk.page/Card_Status/status_checker.php?card_number=${userId}`,
+                        method: "GET",
+                        dataType: "json",
+                        success: function (response) {
+                            console.log("Full Response: ", response);
+
+                            if (response && response.data && response.data.length > 0) {
+                                var user = response.data[0];
+                                console.log("User Data: ", user);
+
+                                // Populate Form Fields
+                                $("#edit_card_number").val(user.card_number || '');
+
+                                // Current Card Status
+                                $("#edit_current_card_status").val(user.current_card_status || 'N/A').trigger("change");
+
+                                // Status Types
+                                $("#edit_status_types").val(user.status_types || 'N/A').trigger("change");
+
+                                // New Card Status
+                                // if (user.new_card_status) {
+                                //     $("#edit_new_card_status").val(user.new_card_status || 'N/A').trigger("change");
+                                // } else {
+                                //     $("#edit_new_card_status").val('N/A').trigger("change");
+                                // }
+                                $("#edit_new_card_status").val(user.new_card_status || 'N/A').trigger("change");
+
+
+                                // Set other fields (like selec_comp, selec_acc, etc.)
+                                // $("#edit_selec_comp").val(user.selec_comp || '').trigger("change");
+                                // $("#edit_selec_acc").val(user.selec_acc || '').trigger("change");
+
+                                // Set User ID in the form attribute
+                                document.getElementById("editDataForm").setAttribute("data-user-id", userId);
+
+                                // Show the Offcanvas
+                                var offcanvasElement = document.getElementById("editUserOffcanvas");
+                                if (offcanvasElement) {
+                                    var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                                    offcanvas.show();
+                                } else {
+                                    console.error("Offcanvas element not found!");
+                                }
+                            } else {
+                                console.log("Data not found or response format is incorrect.");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error fetching data details: ", error);
+                        }
+                    });
+                }
+            </script>

@@ -1,0 +1,249 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <%- contentFor('body') %>
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Batch Management</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                            </div>
+                        </div>
+
+                        <div class="container mt-4" style="width: 90%;">
+                            <h4 class="text-center mb-4">Batch Details</h4>
+                            <hr class="border-3 border-dark">
+                            <div class="card-body">
+                                <form>
+                                    <!-- Category Selection -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Category <span class="required">*</span>:</label>
+                                        <div class="d-flex gap-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="category"
+                                                    id="postPaid" required>
+                                                <label class="form-check-label" for="postPaid">Post-Paid</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="category"
+                                                    id="prePaid">
+                                                <label class="form-check-label" for="prePaid">Pre-Paid</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card Type Selection -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Card Type <span class="required">*</span>:</label>
+                                        <div class="d-flex gap-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="cardType" id="fleet"
+                                                    required>
+                                                <label class="form-check-label" for="fleet">Fleet</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="cardType"
+                                                    id="corporate">
+                                                <label class="form-check-label" for="corporate">Corporate</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="cardType"
+                                                    id="commercial">
+                                                <label class="form-check-label" for="commercial">Commercial</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Plastic Type Selection -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Plastic Type <span class="required">*</span>:</label>
+                                        <div class="d-flex gap-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="plasticType"
+                                                    id="fleetPlastic" required>
+                                                <label class="form-check-label" for="fleetPlastic">Fleet</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="plasticType"
+                                                    id="corporatePlastic">
+                                                <label class="form-check-label" for="corporatePlastic">Corporate</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="plasticType"
+                                                    id="commercialPlastic">
+                                                <label class="form-check-label"
+                                                    for="commercialPlastic">Commercial</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Batch Details -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <!-- Batch No & Select Account in one row -->
+                                            <div class="col-md-6">
+                                                <label class="form-label">Batch No:</label>
+                                                <input type="text" class="form-control" id="batchNo">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Select Account <span class="required">*</span>:</label>
+                                                <select class="form-control select2" data-toggle="select2">
+                                                    <option>Select</option>
+                                                    <option value="Account1">Account 1</option>
+                                                    <option value="Account2">Account 2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row mt-3">
+                                            <!-- Select Company & Batch Description in one row -->
+                                            <div class="col-md-6">
+                                                <label class="form-label">Select Company <span class="required">*</span>:</label>
+                                                <select class="form-control select2" data-toggle="select2">
+                                                    <option>Select</option>
+                                                    <option value="Company1">Company 1</option>
+                                                    <option value="Company2">Company 2</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Batch Description <span class="required">*</span>:</label>
+                                                <input type="text" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row mt-3">
+                                            <!-- No Of Records -->
+                                            <div class="col-md-6">
+                                                <label class="form-label">No Of Records <span class="required">*</span>:</label>
+                                                <input type="number" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="d-flex gap-3 mt-4">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="reset" class="btn btn-secondary">Reset</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%- contentFor('FooterJs') %>
+                    <!-- Datatables js -->
+                    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+                    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                    <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+                    <script
+                        src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+                    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+                    <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+                    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+                    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+                    <script src="assets/vendor/select2/js/select2.min.js"></script>
+                    <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+                    <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+
+
+
+
+                    <!-- Datatable Demo Aapp js -->
+                    <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+                    <script>
+                        $("#basic-datepicker").flatpickr({
+                            plugins: [new monthSelectPlugin({ shorthand: true, dateFormat: "Y-m", altFormat: "F Y" })]
+                        });
+
+                        flatpickr("#monthPicker", {
+                            plugins: [
+                                new monthSelectPlugin({
+                                    shorthand: true, // "01.24" format dikhayega
+                                    dateFormat: "m.y", // month.year format
+                                    altFormat: "F Y", // Full month name and year
+                                    theme: "dark" // Dark theme
+                                })
+                            ]
+                        });
+
+
+                        $(document).ready(() => {
+                            $('.select3').select2({
+                                width: '100%',
+                                dropdownParent: $('#offcanvasRight')
+
+                            })
+                        })
+
+
+                        var a = $("#users_table").DataTable({
+                            lengthChange: !1,
+                            buttons: ["copy", "print", "excel", "csv", "pdf"],
+                            language: {
+                                paginate:
+                                {
+                                    previous: "<i class='ri-arrow-left-s-line'>",
+                                    next: "<i class='ri-arrow-right-s-line'>"
+                                }
+                            },
+                            drawCallback: function () {
+                                $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                            }
+                        });
+                        a.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+                    </script>

@@ -1,0 +1,958 @@
+<%- contentFor('HeaderCss') %>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 30px;
+            /* Adjusted width */
+            height: 18px;
+            /* Adjusted height */
+            margin: 0;
+            /* Remove any default margins */
+            padding: 0;
+            /* Remove any default padding */
+            vertical-align: middle;
+            /* Align vertically */
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            border-radius: 18px;
+            /* Match height */
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            /* Adjusted knob height */
+            width: 14px;
+            /* Adjusted knob width */
+            left: 2px;
+            /* Adjusted knob position */
+            bottom: 2px;
+            /* Adjusted knob position */
+            background-color: white;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            border-radius: 50%;
+            /* Make knob round */
+        }
+
+        input:checked+.slider {
+            background-color: #2196f3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196f3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(12px);
+            /* Adjusted knob movement */
+            -ms-transform: translateX(12px);
+            transform: translateX(12px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+
+    <!-- Datatables css -->
+
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css" />
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" />
+    <%- contentFor('body') %>
+        <div id="preloader">
+            <div id="status">
+                <div class="bouncing-loader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Account Information</h4>
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">Edit Acount</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <hr />
+                        <div class="row">
+                            <form id="acc_entry_app_form">
+                                <div class="row g-3">
+                                    <!-- <div class="col-12">
+                                        <label for="accountNo" class="form-label">Account No:</label>
+                                    </div> -->
+                                    <input type="hidden" class="form-control" id="acc_id" name="acc_no" />
+                                    <input type="hidden" class="form-control" id="a_id" name="id" />
+
+                                    <div class="col-md-6">
+                                        <label for="company" class="form-label">Company*:</label>
+                                        <select class="form-control select2" data-toggle="select2" id = "selec_comp" name="comp_info_id">
+                                           
+                                           
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="companyNameCard" class="form-label">Company Name on Card*:</label>
+                                        <input type="text" class="form-control" id="companyNameCard"
+                                            name="comp_name_card" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="legalName" class="form-label">Legal Name*:</label>
+                                        <input type="text" class="form-control" id="legalName" name="legal_name" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="natureOfBusiness" class="form-label">Nature Of Business:</label>
+                                        <input type="text" class="form-control" id="natureOfBusiness"
+                                            name="buisness_type" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="entity" class="form-label">Entity*:</label>
+                                        <select class="form-control select2" data-toggle="select2" name="entity">
+                                            <option value="">Select Entity</option>
+                                            <option value="1">Entity 1</option>
+                                            <option value="2">Entity 2</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="companyAddress1" class="form-label">Company Address 1*:</label>
+                                        <input type="text" class="form-control" id="companyAddress1" name="address" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="companyAddress2" class="form-label">Company Address 2:</label>
+                                        <input type="text" class="form-control" id="companyAddress2"
+                                            name="companyAddress2" />
+                                    </div>
+                                    
+
+                                    <div class="col-md-6">
+                                        <label for="companyAddress3" class="form-label">Company Address 3:</label>
+                                        <input type="text" class="form-control" id="companyAddress3"
+                                            name="companyAddress3" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="city" class="form-label">City*:</label>
+                                        <select class="form-control select2" data-toggle="select2" name="city">
+                                            <option value="">Select Company</option>
+                                            <option value="1">City 1</option>
+                                            <option value="2">City 2</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="companyPhone1" class="form-label">Company Phone 1:</label>
+                                        <input type="tel" class="form-control" id="companyPhone1" name="phone_1" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="companyPhone2" class="form-label">Company Phone 2:</label>
+                                        <input type="tel" class="form-control" id="companyPhone2"
+                                            name="companyPhone2" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="mobile" class="form-label">Mobile #*:</label>
+                                        <input type="tel" class="form-control" id="mobile" name="mobile" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address*:</label>
+                                        <input type="email" class="form-control" id="email" name="email" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="fax" class="form-label">Fax #:</label>
+                                        <input type="text" class="form-control" id="fax" name="fax" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="contactPerson" class="form-label">Contact Person*:</label>
+                                        <input type="text" class="form-control" id="contactPerson" name="person_name" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="contactDesignation" class="form-label">Contact Designation*:</label>
+                                        <input type="text" class="form-control" id="contactDesignation"
+                                            name="designation" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="ntn" class="form-label">NTN #:</label>
+                                        <input type="text" class="form-control" id="ntn" name="ntn" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="salesTaxReg" class="form-label">Sales Tax Reg.:</label>
+                                        <input type="text" class="form-control" id="salesTaxReg" name="sales_tax" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="authorizedSignatory" class="form-label">Authorized
+                                            Signatory*:</label>
+                                        <input type="text" class="form-control" id="authorizedSignatory"
+                                            name="authorize_signatory" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="authDesig" class="form-label">Auth Desig*:</label>
+                                        <input type="text" class="form-control" id="authDesig" name="auth_design" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="dueDate" class="form-label">Due Date*:</label>
+                                        <input type="text" id="basic-datepicker" class="form-control" placeholder="Date"
+                                            name="due_date" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Billing Frequency*:</label>
+                                        <div class="mt-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="billing_frequency_id"
+                                                    id="monthly" value="1" />
+                                                <label class="form-check-label" for="monthly">Monthly</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="billing_frequency_id"
+                                                    id="fortnightly" value="2" />
+                                                <label class="form-check-label" for="fortnightly">Fortnightly</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="creditLimit" class="form-label">Credit Limit*:</label>
+                                        <input type="number" class="form-control" id="creditLimit"
+                                            name="credit_limit" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="serviceCharges" class="form-label">Service Charges*:</label>
+                                        <input type="number" class="form-control" id="serviceCharges" name="charges" />
+                                    </div>
+
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-soft-dark">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px">
+                            <button class="btn btn-soft-success" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">
+                                <i class="fas fa-plus"></i> Create Account
+                            </button>
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasLeft"
+                            aria-labelledby="offcanvasLeftLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Create</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <hr />
+                                <div class="row">
+                                    <form id="acc_entry_cr_form">
+                                        <div class="row g-3">
+                                            <!-- <div class="col-12">
+                                        <label for="accountNo" class="form-label">Account No:</label>
+                                    </div> -->
+                                            <input type="hidden" class="form-control" id="acc_id" name="acc_no" />
+                                            <input type="hidden" class="form-control" id="a_id" name="id" />
+                                            <div class="col-md-6">
+                                                <label for="accountNo" class="form-label">Account No:</label>
+                                                <input type="number" class="form-control" id="accountNo" name="acc_no"
+                                                    required="" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="selec_comp" class="form-label">Company</label>
+                                                <select id="selec_comp_ed" class="form-control select3"
+                                                    data-toggle="select2" name="comp_info_id"></select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyNameCard" class="form-label">Company Name on
+                                                    Card*:</label>
+                                                <input type="text" class="form-control" id="companyNameCard"
+                                                    name="comp_name_card" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="legalName" class="form-label">Legal Name*:</label>
+                                                <input type="text" class="form-control" id="legalName"
+                                                    name="legal_name" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="natureOfBusiness" class="form-label">Nature Of
+                                                    Business:</label>
+                                                <input type="text" class="form-control" id="natureOfBusiness"
+                                                    name="buisness_type" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="entity" class="form-label">Entity*:</label>
+                                                <select class="form-control select2" data-toggle="select2"
+                                                    name="entity">
+                                                    <option value="">Select Entity</option>
+                                                    <option value="1">Entity 1</option>
+                                                    <option value="2">Entity 2</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyAddress1" class="form-label">Company Address
+                                                    1*:</label>
+                                                <input type="text" class="form-control" id="companyAddress1"
+                                                    name="address" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyAddress2" class="form-label">Company Address
+                                                    2:</label>
+                                                <input type="text" class="form-control" id="companyAddress2"
+                                                    name="companyAddress2" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyAddress3" class="form-label">Company Address
+                                                    3:</label>
+                                                <input type="text" class="form-control" id="companyAddress3"
+                                                    name="companyAddress3" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="city" class="form-label">City*:</label>
+                                                <select class="form-control select2" data-toggle="select2" name="city">
+                                                    <option value="">Select Company</option>
+                                                    <option value="1">City 1</option>
+                                                    <option value="2">City 2</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyPhone1" class="form-label">Company Phone 1:</label>
+                                                <input type="tel" class="form-control" id="companyPhone1"
+                                                    name="phone_1" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="companyPhone2" class="form-label">Company Phone 2:</label>
+                                                <input type="tel" class="form-control" id="companyPhone2"
+                                                    name="companyPhone2" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="mobile" class="form-label">Mobile #*:</label>
+                                                <input type="tel" class="form-control" id="mobile" name="mobile" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="email" class="form-label">Email Address*:</label>
+                                                <input type="email" class="form-control" id="email" name="email" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="fax" class="form-label">Fax #:</label>
+                                                <input type="text" class="form-control" id="fax" name="fax" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="contactPerson" class="form-label">Contact Person*:</label>
+                                                <input type="text" class="form-control" id="contactPerson"
+                                                    name="person_name" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="contactDesignation" class="form-label">Contact
+                                                    Designation*:</label>
+                                                <input type="text" class="form-control" id="contactDesignation"
+                                                    name="designation" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="ntn" class="form-label">NTN #:</label>
+                                                <input type="text" class="form-control" id="ntn" name="ntn" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="salesTaxReg" class="form-label">Sales Tax Reg.:</label>
+                                                <input type="text" class="form-control" id="salesTaxReg"
+                                                    name="sales_tax" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="authorizedSignatory" class="form-label">Authorized
+                                                    Signatory*:</label>
+                                                <input type="text" class="form-control" id="authorizedSignatory"
+                                                    name="authorize_signatory" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="authDesig" class="form-label">Auth Desig*:</label>
+                                                <input type="text" class="form-control" id="authDesig"
+                                                    name="auth_design" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="dueDate" class="form-label">Due Date*:</label>
+                                                <input type="text" id="basic-datepicker" class="form-control"
+                                                    placeholder="Date" name="due_date" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label class="form-label">Billing Frequency*:</label>
+                                                <div class="mt-2">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="billing_frequency_id" id="monthly" value="1" />
+                                                        <label class="form-check-label" for="monthly">Monthly</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="billing_frequency_id" id="fortnightly" value="2" />
+                                                        <label class="form-check-label"
+                                                            for="fortnightly">Fortnightly</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="creditLimit" class="form-label">Credit Limit*:</label>
+                                                <input type="number" class="form-control" id="creditLimit"
+                                                    name="credit_limit" />
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="serviceCharges" class="form-label">Service Charges*:</label>
+                                                <input type="number" class="form-control" id="serviceCharges"
+                                                    name="charges" />
+                                            </div>
+
+                                            <div class="col-12 mt-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Submit
+                                                </button>
+                                                <button type="button" class="btn btn-soft-dark">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="my_table" class="table table-striped nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Sno</th>
+                                    <th>Company Info ID</th>
+                                    <th>Legal Name</th>
+                                    <th>Company Name Card</th>
+                                    <th>Date</th>
+                                    <th>Business Type</th>
+                                    <th>Contact Person</th>
+                                    <th>Entity</th>
+                                    <!-- <th>Address</th> -->
+                                    <th>City</th>
+                                    <th>Address 1</th>
+                                    <th>Phone 1</th>
+                                    <th>Mobile</th>
+                                    <th>Apporve</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <!-- <table id="my_table">
+                            <thead>
+                                <tr>
+                                    <th>Company Info ID</th>
+                                    <th>Legal Name</th>
+                                    <th>Company Name Card</th>
+                                    <th>Entity</th>
+                                    <th>Business Type</th>
+                                    <th>Address</th>
+                                    <th>Address 2</th>
+                                    <th>City</th>
+                                    <th>Phone 1</th>
+                                    <th>Phone 2</th>
+                                    <th>Mobile</th>
+                                    <th>Apporve</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot></tfoot>
+                        </table> -->
+                    </div>
+                    <!-- end card body-->
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col-->
+        </div>
+        <!-- end row-->
+
+        <%- contentFor('FooterJs') %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+                crossorigin="anonymous"></script>
+
+            <!-- Datatables js -->
+            <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+            <script src="assets/vendor/select2/js/select2.min.js"></script>
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+            <!-- Timepicker Demo js -->
+            <script src="assets/js/pages/demo.flatpickr.js"></script>
+            <!-- sweetalert -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            <!-- Datatable Demo Aapp js -->
+            <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+            <script>
+                function fetchData(apiUrl, dropdownId, nameField) {
+                    fetch(apiUrl)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("API Response:", data);
+
+                            let dropdown = document.getElementById(dropdownId);
+                            dropdown.innerHTML = '<option value="">Select</option>';
+
+                            // ✅ Check if API returned success status and data is an array
+                            if (data.status === "success" && Array.isArray(data.data)) {
+                                data.data.forEach((item) => {
+                                    let option = document.createElement("option");
+                                    option.value = item.id;
+                                    option.textContent = item[nameField];
+                                    dropdown.appendChild(option);
+                                });
+                            } else {
+                                console.error("Error: API did not return a valid data array", data);
+                            }
+                        })
+                        .catch((error) => console.error("Error fetching data:", error));
+                }
+
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    // fetchData(
+                    //     "https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php",
+                    //     "selec_acc",
+                    //     "acc_no"
+                    // );
+                });
+
+                flatpickr("#basic-datepicker", {
+
+                    dateFormat: "Y-m-d"
+                });
+
+                $(document).ready(() => {
+
+
+                    fetchData(
+                        "https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php",
+                        "selec_comp",
+                        "company_name"
+                    );
+                    fetchData(
+                        "https://hungry-chaum.92-205-119-218.plesk.page/company_information/all_comp.php",
+                        "selec_comp_ed",
+                        "company_name"
+                    );
+
+                    // $(".select3").select2({
+                    //     width: "100%",
+                    //     dropdownParent: $("#offcanvasRight"),
+                    // });
+                    table = $("#my_table").DataTable({
+                        lengthChange: false,
+                        buttons: ["copy", "print", "excel", "csv", "pdf"],
+                        language: {
+                            paginate: {
+                                previous: "<i class='ri-arrow-left-s-line'>",
+                                next: "<i class='ri-arrow-right-s-line'>",
+                            },
+                        },
+                        scrollX: true,
+                        // overflowX: true,
+                        drawCallback: function () {
+                            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+                        },
+                    });
+
+                    table.buttons().container().appendTo("#my_table_wrapper .col-md-6:eq(0)");
+
+                    fetchtable();
+                    $("#my_table tbody").on("change", ".accountApprovalToggle", function () {
+                        const recordId = $(this).data("record-id"); // Get the record ID
+                        if (this.checked) {
+                            approve_account(recordId);
+                        }
+                    });
+                });
+
+                // event
+                $("#acc_entry_app_form").submit(function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    let formData = new FormData(this);
+
+                    $.ajax({
+                        // C:\xampp\htdocs\card_management\account_management\entry_maker.php
+
+                        url: "https://hungry-chaum.92-205-119-218.plesk.page/account_management/entry_maker_update.php",
+                        method: "POST",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (response, textStatus, xhr) {
+                            if (xhr.status === 200) {
+                                showPopup("Success!", "Account updated successfully", "success");
+                                fetchtable();
+                            } else if (xhr.status === 409) {
+                                showPopup(
+                                    "Conflict!",
+                                    "Account number or Email already exists",
+                                    "warning"
+                                );
+                            } else if (xhr.status === 404) {
+                                showPopup("Not Found!", "Error: Resource not found.", "error");
+                            }
+                        },
+                        error: function (xhr) {
+                            let message = "An Error Occurred. Please try again.";
+                            let icon = "error";
+
+                            if (xhr.status === 500) {
+                                message = "Database update error";
+                            } else if (xhr.status === 409) {
+                                message = "Error: Conflict detected!";
+                                icon = "warning";
+                            } else if (xhr.status === 404) {
+                                message = "Error: Resource not found!";
+                            }
+                            showPopup("Error!", message, icon);
+                        },
+                    });
+                });
+
+                $("#acc_entry_cr_form").submit(function (event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    let formData = new FormData(this);
+                    // const dueDateElement = document.querySelector('input[name="due_date_ed"]'); 
+                    // const currentDueDate = dueDateElement.value;
+                    // const quotedDueDate = `"${currentDueDate}"`;
+
+                    // formData.set('due_date', quotedDueDate);
+
+                    $.ajax({
+                        // C:\xampp\htdocs\card_management\account_management\entry_maker.php
+
+                        url: "https://hungry-chaum.92-205-119-218.plesk.page/account_management/entry_maker.php",
+                        method: "POST",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (response, textStatus, xhr) {
+                            if (xhr.status === 201) {
+                                showPopup("Success!", "Account Entry successfully", "success");
+                                fetchtable();
+                            } else if (xhr.status === 409) {
+                                showPopup(
+                                    "Conflict!",
+                                    "Account number or Email already exists",
+                                    "warning"
+                                );
+                            } else if (xhr.status === 404) {
+                                showPopup("Not Found!", "Error: Resource not found.", "error");
+                            }
+                        },
+                        error: function (xhr) {
+                            let message = "An Error Occurred. Please try again.";
+                            let icon = "error";
+
+                            if (xhr.status === 500) {
+                                message = "Database update error";
+                            } else if (xhr.status === 409) {
+                                message = "Error: Conflict detected!";
+                                icon = "warning";
+                            } else if (xhr.status === 404) {
+                                message = "Error: Resource not found!";
+                            }
+                            showPopup("Error!", message, icon);
+                        },
+                    });
+                });
+
+                // $(document).on('click', '.edit-button', function () {
+                //     console.log("record id : ", $(this).data('record-id'))
+                //     console.log("acc no : ", $(this).data('acc-id'))
+                //     $('#a_id').val($(this).data('record-id'));
+                //     $('#acc_id').val($(this).data('acc-id'));
+                //     // Set hidden input value
+                // });
+
+                function approve_account(id) {
+                    // let formData = new FormData();
+                    // formData.append("acc_no", 12);
+                    $.ajax({
+                        // C:\xampp\htdocs\card_management\account_management\entry_maker.php
+                        url: `https://hungry-chaum.92-205-119-218.plesk.page/account_management/acc_approv.php?acc_no=${id}`,
+                        method: "GET",
+                        processData: false,
+                        contentType: false,
+                        data: false,
+                        success: function (response, textStatus, xhr) {
+                            if (xhr.status === 200) {
+                                showPopup("Success!", "Account Approved successfully", "success");
+                            } else if (xhr.status === 409) {
+                                showPopup(
+                                    "Conflict!",
+                                    "Account number or Email already exists",
+                                    "warning"
+                                );
+                            } else if (xhr.status === 404) {
+                                showPopup("Not Found!", "Error: Resource not found.", "error");
+                            }
+                        },
+                        error: function (xhr) {
+                            let message = "An Error Occurred. Please try again.";
+                            let icon = "error";
+
+                            if (xhr.status === 500) {
+                                message = "Database update error";
+                            } else if (xhr.status === 409) {
+                                message = "Error: Conflict detected!";
+                                icon = "warning";
+                            } else if (xhr.status === 404) {
+                                message = "Error: Resource not found!";
+                            }
+                            showPopup("Error!", message, icon);
+                        },
+                    });
+                }
+
+                function update_table(tdata) {
+                    table.clear().draw(); // Clear existing table data
+                    $.each(tdata, function (index, data) {
+                        let appr = `<label class="switch">
+  <input type="checkbox" class="accountApprovalToggle" data-record-id = ${data.acc_no}>
+  <span class="slider round"></span>
+</label>`;
+                        let edit = `<button class="edit-button btn btn-soft-warning" type="button" data-record-id="${data.id}" onclick = "get_acc(${data.acc_no})">
+    <i class="bx bx-edit-alt font-size-16 align-middle"></i></button>`;
+
+                        // <button type="button" id="edit" name="edit" onclick="editData(9)" class="btn btn-soft-warning"><i class="bx bx-edit-alt font-size-16 align-middle"></i></button>
+                        table.row
+                            .add([
+                                index + 1,
+                                "000" + data.comp_info_id + "-000" + data.id, // Assuming business_unit_id is not needed
+                                data.legal_name, // Using legal_name as company_name equivalent
+                                data.comp_name_card, // Using created_at date as completed_date equivalent
+                                data.due_date,
+                                data.buisness_type, // Using buisness_type as bu_name equivalent
+                                data.person_name, // Using person_name as reported_by_name equivalent
+                                data.entity,  // Using entity as type_title equivalent (adjust as needed)
+                                data.city,
+                                data.address,
+                                // data.status_id ? data.status_id : "N/A", // Using status_id as status_title equivalent (adjust as needed)
+                                data.phone_1,
+                                data.mobile,
+                                // data.credit_limit, // Using credit_limit as priority_title equivalent (adjust as needed)
+                                // data.charges,
+                                appr,
+                                edit,
+                                // Using charges as impact_title equivalent (adjust as needed)
+                            ])
+                            .draw(false);
+                    });
+                }
+
+                function fetchtable() {
+                    var settings = {
+                        url: "https://hungry-chaum.92-205-119-218.plesk.page/account_management/all_acc.php",
+                        method: "GET",
+                    };
+                    $.ajax(settings).done(function (response) {
+                        console.log(response);
+                        update_table(response["data"]);
+                    });
+                    // .fail(function)
+                }
+
+                function showPopup(title, message, icon) {
+                    Swal.fire({
+                        title: title,
+                        text: message,
+                        icon: icon,
+                        confirmButtonText: "OK",
+                    });
+                }
+
+                function get_acc(ac_id) {
+                    var settings = {
+                        url: `https://hungry-chaum.92-205-119-218.plesk.page/account_management/acc_info.php`,
+                        method: "GET",
+                        data: { acc_no: ac_id },
+                        success: function (response) {
+                            console.log("Response Data: ", response);
+
+                            if (response && response.data) {
+                                // var user = response.data; // Accessing 'data' from response
+                                let form = document.getElementById("acc_entry_app_form");
+                                // Populate the modal form with the fetched data
+                                const formData = response.data;
+
+                                // Set input values directly using the 'name' attribute
+                                form.querySelector('[name="id"]').value = formData.id;
+                                form.querySelector('[name="comp_info_id"]').value =
+                                    formData.comp_info_id;
+                                form.querySelector('[name="legal_name"]').value = formData.legal_name;
+                                form.querySelector('[name="comp_name_card"]').value =
+                                    formData.comp_name_card;
+                                form.querySelector('[name="entity"]').value = formData.entity;
+                                form.querySelector('[name="buisness_type"]').value =
+                                    formData.buisness_type;
+                                form.querySelector('[name="address"]').value = formData.address;
+                                form.querySelector('[name="companyAddress2"]').value =
+                                    formData.address_2; // Corrected to address_2
+                                form.querySelector('[name="city"]').value = formData.city;
+                                form.querySelector('[name="phone_1"]').value = formData.phone_1;
+                                form.querySelector('[name="companyPhone2"]').value = formData.phone_2; // Corrected to companyPhone2
+                                form.querySelector('[name="mobile"]').value = formData.mobile;
+                                form.querySelector('[name="email"]').value = formData.email;
+                                form.querySelector('[name="fax"]').value = formData.fax;
+                                form.querySelector('[name="person_name"]').value =
+                                    formData.person_name;
+                                form.querySelector('[name="designation"]').value =
+                                    formData.designation;
+                                form.querySelector('[name="ntn"]').value = formData.ntn;
+                                form.querySelector('[name="sales_tax"]').value = formData.sales_tax;
+                                form.querySelector('[name="authorize_signatory"]').value =
+                                    formData.authorize_signatory;
+                                form.querySelector('[name="auth_design"]').value =
+                                    formData.auth_design;
+                                form.querySelector('[name="due_date"]').value = formData.due_date;
+                                form.querySelector('[name="billing_frequency_id"]').value =
+                                    formData.billing_frequency_id;
+                                form.querySelector('[name="credit_limit"]').value =
+                                    formData.credit_limit;
+                                form.querySelector('[name="charges"]').value = formData.charges;
+                                // form.querySelector('[id="a_id"]').value = formData.id;
+                                $("#a_id").val(formData.id);
+
+                                const billingFrequencyRadio = form.querySelector(
+                                    `[name="billing_frequency_id"][value="${formData.billing_frequency_id}"]`
+                                );
+                                if (billingFrequencyRadio) {
+                                    billingFrequencyRadio.checked = true;
+                                }
+
+                                // Trigger change event for Select2 (if used)
+                                $(form).find(".select2").trigger("change");
+
+                                //     // Show the offcanvas form
+                                var offcanvasElement = document.getElementById("offcanvasRight");
+                                var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                                offcanvas.show();
+                            }
+                            //   } else {
+                            //     console.log("User not found or response format is incorrect.");
+                            //     alert("Error: User not found or response format is incorrect.");
+                            //   }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error fetching user details: ", error);
+                            alert("There was an error fetching user details.");
+                        },
+                    };
+
+                    $.ajax(settings);
+                }
+            </script>

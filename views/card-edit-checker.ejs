@@ -1,0 +1,324 @@
+<%- contentFor('HeaderCss') %>
+    <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <!-- Daterangepicker css -->
+    <link href="assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+
+    <%- contentFor('body') %>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div
+                    class="page-title-box justify-content-between d-flex align-items-md-center flex-md-row flex-column">
+                    <h4 class="page-title">Card Management</h4>
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Jidox</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                        <li class="breadcrumb-item active">User</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        </div>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                            aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                            </div>
+                        </div>
+
+                        <div class="container mt-4" style="width: 90%; margin: 0 auto;">
+                            <h4 class="text-center mb-4">Card Edit-Checker</h4>
+                            <hr class="border-3 border-dark">
+
+
+                            <div class="container mt-4">
+                                <form>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Select Card</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select Card</option>
+                                                <option value="1">Card 1</option>
+                                                <option value="2">Card 2</option>
+                                            </select>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="firstName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="firstName"
+                                                placeholder="Enter first name">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName"
+                                                placeholder="Enter last name">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Gender</label><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                                    value="male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                                    value="female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="dob" class="form-label">Date of Birth</label>
+                                            <input type="text" class="form-control" id="dob">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Marital Status</label><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="sinlge"
+                                                    value="single">
+                                                <label class="form-check-label" for="single">Single</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender" id="married"
+                                                    value="married">
+                                                <label class="form-check-label" for="married">Married</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" class="form-control" id="address"
+                                                placeholder="Enter address">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">City</label>
+                                            <select class="form-control select2" data-toggle="select2">
+                                                <option value="">Select City</option>
+                                                <option value="1">City 1</option>
+                                                <option value="2">City 2</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="cnic" class="form-label">CNIC</label>
+                                                <input type="text" class="form-control" id="cnic"
+                                                    placeholder="Enter CNIC">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="msisdn" class="form-label">MSISDN</label>
+                                                <input type="text" class="form-control" id="msisdn"
+                                                    placeholder="Enter msisdn">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Enter email">
+                                            </div>
+                                        </div>
+                                        <h4 class="text-center mb-4">Card Product</h4>
+
+                                        <div class="d-flex flex-wrap gap-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="product"
+                                                    value="product">
+                                                <label class="form-check-label" for="product">Product</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="diesel"
+                                                    value="diesel">
+                                                <label class="form-check-label" for="diesel">Diesel</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="hasron"
+                                                    value="hasron">
+                                                <label class="form-check-label" for="hasron">Hasron</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="4GT2050"
+                                                    value="4GT2050">
+                                                <label class="form-check-label" for="4GT2050">4GT 2050</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="3GT1030"
+                                                    value="3GT1030">
+                                                <label class="form-check-label" for="3GT1030">3GT 1030</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="4GT1030"
+                                                    value="4GT1030">
+                                                <label class="form-check-label" for="4GT1030">4GT 1030</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="SS540"
+                                                    value="SS540">
+                                                <label class="form-check-label" for="SS540">SS 5 40</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="SMC1040"
+                                                    value="SMC1040">
+                                                <label class="form-check-label" for="SMC1040">SMC 1040</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="SILK2050"
+                                                    value="SILK2050">
+                                                <label class="form-check-label" for="SILK2050">SILK 2050</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="BLIT2050"
+                                                    value="BLIT2050">
+                                                <label class="form-check-label" for="BLIT2050">BLIT 2050</label>
+                                            </div>
+                                        </div>
+                                        <h4 class="text-center mb-4">Card Limit</h4>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="dailyFrequency" class="form-label">Daily Frequency</label>
+                                                <input type="number" class="form-control" id="dailyFrequency"
+                                                    placeholder="Enter daily frequency">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="weeklyFrequency" class="form-label">Weekly Frequency</label>
+                                                <input type="number" class="form-control" id="weeklyFrequency"
+                                                    placeholder="Enter weekly frequency">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Limit Type</label><br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="limitType"
+                                                        id="amount" value="amount">
+                                                    <label class="form-check-label" for="amount">Amount</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="limitType"
+                                                        id="quantity" value="quantity">
+                                                    <label class="form-check-label" for="quantity">Quantity</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary"
+                                            style="width: 20%;">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div> <!-- end row-->
+
+
+        <%- contentFor('FooterJs') %>
+            <!-- Datatables js -->
+            <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+            <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+            <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+            <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.pdfmin.js"></script>
+            <script src="assets/vendor/select2/js/select2.min.js"></script>
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+
+
+
+            <!-- Flatpickr Timepicker Plugin js -->
+            <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+
+            <!-- Typehead Demo js -->
+
+            <!-- Timepicker Demo js -->
+            <script src="assets/js/pages/demo.flatpickr.js"></script>
+
+            <!-- <script src="assets/js/pages/demo.typehead.js"></script> -->
+            <!-- Daterangepicker Plugin js -->
+            <script src="assets/vendor/daterangepicker/moment.min.js"></script>
+            <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+
+
+
+
+
+            <!-- Datatable Demo Aapp js -->
+            <!-- <script src="assets/js/pages/demo.datatable-init.js"></script> -->
+            <script>
+                flatpickr("#range-datepicker", {
+                    mode: "range",
+                    dateFormat: "d-m-Y"
+                });
+
+
+
+                $(document).ready(() => {
+                    $('.select3').select2({
+                        width: '100%',
+                        dropdownParent: $('#offcanvasRight')
+
+                    })
+                })
+
+
+                var a = $("#users_table").DataTable({
+                    lengthChange: !1,
+                    buttons: ["copy", "print", "excel", "csv", "pdf"],
+                    language: {
+                        paginate:
+                        {
+                            previous: "<i class='ri-arrow-left-s-line'>",
+                            next: "<i class='ri-arrow-right-s-line'>"
+                        }
+                    },
+                    drawCallback: function () {
+                        $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+                    }
+                });
+                a.buttons().container().appendTo("#users_table_wrapper .col-md-6:eq(0)");
+            </script>
